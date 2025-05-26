@@ -6,7 +6,7 @@ export function InteractName() {
     <Form.Item<ProductType>
       //   label="Название"
       name="name"
-      //   rules={[{ required: true, message: "Please input your username!" }]}
+      rules={[{ required: true, message: "Введи название!" }]}
     >
       <Input placeholder="Введи название" />
     </Form.Item>

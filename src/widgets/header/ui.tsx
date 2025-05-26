@@ -10,17 +10,25 @@ export function Header({ ...props }: ComponentProps<"div">) {
   const { token } = useToken();
   const navigate = useNavigate();
 
-  function handleNavigate() {
+  function handleAddPage() {
     navigate("/add-product");
+  }
+
+  function handleHomePage() {
+    navigate("/");
   }
 
   return (
     <div {...props}>
       <Flex className={styles.header} justify="space-between" align="center">
-        <Typography.Title level={2} style={{ color: token.colorPrimary, marginBottom: 0 }}>
+        <Typography.Title
+          level={2}
+          style={{ color: token.colorPrimary, marginBottom: 0 }}
+          onClick={handleHomePage}
+        >
           BANKA
         </Typography.Title>
-        <Button shape="circle" icon={<PlusOutlined />} onClick={handleNavigate} />
+        <Button shape="circle" icon={<PlusOutlined />} onClick={handleAddPage} />
       </Flex>
     </div>
   );

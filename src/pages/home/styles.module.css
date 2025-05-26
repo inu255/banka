@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--horizontal-frame);
+  margin-top: var(--horizontal-frame);
+}
+
+.container {
+  margin: 0 var(--negative-horizontal-frame);
+  max-width: calc(100% + var(--horizontal-frame) * 2);
+
+  background: #ffe7ff;
+
+  padding: 0 var(--horizontal-frame);
+
+  height: 100%;
+}
+
+.tabs {
+  background: white;
+
+  margin: 0 var(--negative-horizontal-frame);
+  max-width: calc(100% + var(--horizontal-frame) * 2);
+
+  padding: 0 var(--negative-horizontal-frame);
+}

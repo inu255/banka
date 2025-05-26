@@ -1,5 +1,6 @@
 export type ProductType = {
   name: string;
   brand: string;
-  type: string;
+  category: string;
+  openDate: string;
 };

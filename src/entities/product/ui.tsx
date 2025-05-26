@@ -6,10 +6,11 @@ import styles from "./styles.module.css";
 type Props = {
   name: ReactNode;
   brand: ReactNode;
-  type: ReactNode;
+  category: ReactNode;
+  openDate: ReactNode;
 };
 
-export function Product({ name, brand, type }: Props) {
+export function Product({ name, brand, category, openDate }: Props) {
   return (
     <div>
       <Space direction="vertical">
@@ -24,7 +25,8 @@ export function Product({ name, brand, type }: Props) {
 
         {name}
         {brand}
-        {type}
+        {category}
+        {openDate}
       </Space>
     </div>
   );

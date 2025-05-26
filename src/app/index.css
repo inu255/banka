@@ -14,6 +14,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   --horizontal-frame: 15px;
+  --negative-horizontal-frame: calc(var(--horizontal-frame) * -1);
 }
 
 .container {
@@ -31,4 +32,5 @@
 
 .full-width-container {
   margin: 0 calc(var(--horizontal-frame) * -1);
+  width: calc(100% + var(--horizontal-frame) * 2);
 }

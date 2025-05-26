@@ -6,31 +6,31 @@ import type { ProductType } from "src/entities/product";
 import { Prop } from "src/entities/prop";
 import { db } from "src/shared/lib/db";
 
-export function InteractBrand() {
+export function InteractCategory() {
   const [isAddingModalOpen, setIsAddingModalOpen] = useState(false);
-  const brands = useLiveQuery(() => db.brands.toArray());
+  const categories = useLiveQuery(() => db.categories.toArray());
   const [messageApi, contextHolder] = message.useMessage();
 
-  const transformedBrands = useMemo(
+  const transformedCategories = useMemo(
     () =>
-      brands?.map((item) => ({
+      categories?.map((item) => ({
         value: item.id,
         label: item.name,
       })),
-    [brands]
+    [categories]
   );
 
-  async function createBrand(brand: string) {
+  async function createCategory(category: string) {
     try {
-      await db.brands.add({ name: brand });
+      await db.categories.add({ name: category });
 
       messageApi.open({
         type: "success",
-        content: `Бренд ${brand} успешно добавлен`,
+        content: `Категория ${category} успешно добавлен`,
       });
       setIsAddingModalOpen(false);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       messageApi.open({
         type: "error",
         content: "Ошибка добавления",
@@ -41,26 +41,23 @@ export function InteractBrand() {
   return (
     <div>
       {contextHolder}
+
       <Flex gap={8}>
         <Form.Item<ProductType>
           //   label="Название"
-          name="brand"
+          name="category"
           style={{ flex: 1 }}
-          rules={[{ required: true, message: "Выбери бренд!" }]}
+          rules={[{ required: true, message: "Выбери категорию!" }]}
         >
-          <Select
-            // style={{ width: 120 }}
-            placeholder="Выбери бренд"
-            options={transformedBrands}
-          />
+          <Select placeholder="Выбери категорию" options={transformedCategories} />
         </Form.Item>
         <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsAddingModalOpen(true)} />
       </Flex>
       <Prop
-        title="Добавить бренд"
+        title="Добавить категорию"
         isOpen={isAddingModalOpen}
         onClose={() => setIsAddingModalOpen(false)}
-        onAdd={createBrand}
+        onAdd={createCategory}
       />
     </div>
   );
