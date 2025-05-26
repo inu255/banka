@@ -1,0 +1,10 @@
+.imageContainer {
+  margin: 0 calc(var(--horizontal-frame) * -1);
+
+  width: calc(100% + var(--horizontal-frame) * 2);
+}
+
+.image {
+  display: block;
+  width: 100%;
+}
