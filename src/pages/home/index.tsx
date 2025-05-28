@@ -20,6 +20,8 @@ export default function Home() {
     [categories]
   );
 
+  console.log(products);
+
   return (
     <div className={styles.container}>
       <Tabs

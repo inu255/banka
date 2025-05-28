@@ -28,7 +28,9 @@ export function Header({ ...props }: ComponentProps<"div">) {
         >
           BANKA
         </Typography.Title>
-        <Button shape="circle" icon={<PlusOutlined />} onClick={handleAddPage} />
+        <Button icon={<PlusOutlined />} type="link" onClick={handleAddPage}>
+          Добавить
+        </Button>
       </Flex>
     </div>
   );

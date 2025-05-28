@@ -24,6 +24,7 @@ function App() {
           token: {
             // Seed Token
             colorPrimary: "#e85fed",
+            colorLink: "#e85fed",
             // borderRadius: 2,
             // Alias Token
             // colorBgContainer: "#f6ffed",

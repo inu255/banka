@@ -4,7 +4,7 @@ import { db, type Product } from "src/shared/lib/db";
 
 const { Title, Text } = Typography;
 
-export function ProductCard({ brandId, name }: Product) {
+export function ProductCard({ brandId, name, image }: Product) {
   const brand = useLiveQuery(() => db.categories.toArray())?.find((item) => item.id === brandId);
 
   return (
@@ -12,8 +12,9 @@ export function ProductCard({ brandId, name }: Product) {
       cover={
         <Image
           // className={styles.image}
+          style={{ aspectRatio: "1/1" }}
           alt="product"
-          src="https://placehold.co/50"
+          src={image}
           preview={false}
         />
       }

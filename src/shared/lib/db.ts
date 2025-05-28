@@ -6,7 +6,7 @@ export interface Product {
   brandId: number;
   categoryId: number;
   openDate: string;
-  image?: Blob;
+  image?: string;
 }
 
 export interface Brand {

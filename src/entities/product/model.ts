@@ -3,4 +3,5 @@ export type ProductType = {
   brand: string;
   category: string;
   openDate: string;
+  image?: { file: File };
 };
