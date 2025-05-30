@@ -1,9 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router";
 import { ConfigProvider } from "antd";
 import dayjs from "dayjs";
+import { BrowserRouter, Route, Routes } from "react-router";
 
-import Home from "src/pages/home";
 import AddProduct from "src/pages/add-product";
+import Product from "src/pages/product";
+import Home from "src/pages/home";
+
 import { Header } from "src/widgets/header";
 
 import ruRU from "antd/locale/ru_RU";
@@ -37,6 +39,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/product/:id" element={<Product />} />
           </Routes>
         </BrowserRouter>
       </ConfigProvider>

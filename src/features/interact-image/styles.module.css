@@ -1,6 +1,5 @@
 .uploadArea {
   aspect-ratio: 1/1;
-  background: wheat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,8 +7,12 @@
 
   margin: 0 calc(var(--horizontal-frame) * -1);
   /* width: calc(100% + var(--horizontal-frame) * 2); */
-  width: 100vw;
   background: var(--color-bg);
+  width: 450px;
+
+  @media (max-width: 450px) {
+    width: 100vw;
+  }
 }
 
 .buttonText {
