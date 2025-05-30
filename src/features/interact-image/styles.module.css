@@ -1,0 +1,23 @@
+.uploadArea {
+  aspect-ratio: 1/1;
+  background: wheat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 calc(var(--horizontal-frame) * -1);
+  /* width: calc(100% + var(--horizontal-frame) * 2); */
+  width: 100vw;
+  background: var(--color-bg);
+}
+
+.buttonText {
+  margin-top: 8px;
+  font-size: 24px;
+}
+
+.preview {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}

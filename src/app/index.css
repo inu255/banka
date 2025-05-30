@@ -15,6 +15,8 @@
   -moz-osx-font-smoothing: grayscale; */
   --horizontal-frame: 15px;
   --negative-horizontal-frame: calc(var(--horizontal-frame) * -1);
+
+  --color-bg: #ffe7ff;
 }
 
 .container {

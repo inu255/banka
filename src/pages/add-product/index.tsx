@@ -3,17 +3,10 @@ import { Product, type ProductType } from "src/entities/product";
 import { InteractBrand } from "src/features/interact-brand";
 import { InteractCategory } from "src/features/interact-category";
 import { InteractImage } from "src/features/interact-image";
+import { getCompressedBase64 } from "src/features/interact-image";
 import { InteractName } from "src/features/interact-name";
 import { InteractOpenDate } from "src/features/interact-open-date";
 import { db } from "src/shared/lib/db";
-
-const getBase64 = (file: File): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
 
 export default function AddProduct() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -31,7 +24,8 @@ export default function AddProduct() {
         name: values.name,
         openDate: values.openDate.valueOf(),
         categoryId: Number(values.category),
-        image: values.image ? await getBase64(values.image.file) : "",
+        // TODO: нужно хранить сразу в base64, но в инпуте картинки не работает. Надо разобраться и пофиксить
+        image: values.image ? await getCompressedBase64(values.image.file) : "",
       });
 
       messageApi.open({

@@ -9,7 +9,7 @@
   margin: 0 var(--negative-horizontal-frame);
   max-width: calc(100% + var(--horizontal-frame) * 2);
 
-  background: #ffe7ff;
+  background: var(--color-bg);
 
   padding: 0 var(--horizontal-frame);
 
