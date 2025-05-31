@@ -19,7 +19,7 @@ export function Header({ ...props }: ComponentProps<"div">) {
   }
 
   return (
-    <div {...props}>
+    <header {...props}>
       <Flex className={styles.header} justify="space-between" align="center">
         <Typography.Title
           level={2}
@@ -32,6 +32,6 @@ export function Header({ ...props }: ComponentProps<"div">) {
           Добавить
         </Button>
       </Flex>
-    </div>
+    </header>
   );
 }

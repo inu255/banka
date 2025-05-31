@@ -1,15 +1,17 @@
 import { ConfigProvider } from "antd";
 import dayjs from "dayjs";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 
-import AddProduct from "src/pages/add-product";
-import Product from "src/pages/product";
-import Home from "src/pages/home";
-
-import { Header } from "src/widgets/header";
+import AddProductPage from "src/pages/add-product";
+import HomePage from "src/pages/home";
+import ProductPage from "src/pages/product";
 
 import ruRU from "antd/locale/ru_RU";
 import "dayjs/locale/zh-cn";
+
+import AuthPage from "src/pages/auth";
+import { AuthProvider, RequireAuth } from "src/shared/lib/auth";
+import { ProtectedLayout } from "./ProtectedLayout";
 
 import "./index.css";
 
@@ -17,33 +19,48 @@ dayjs.locale("ru-ru");
 
 function App() {
   return (
-    <div className="container">
-      <ConfigProvider
-        locale={ruRU}
-        componentSize="large"
-        theme={{
-          cssVar: true,
-          token: {
-            // Seed Token
-            colorPrimary: "#e85fed",
-            colorLink: "#e85fed",
-            // borderRadius: 2,
-            // Alias Token
-            // colorBgContainer: "#f6ffed",
-          },
-        }}
-      >
+    <ConfigProvider
+      locale={ruRU}
+      componentSize="large"
+      theme={{
+        cssVar: true,
+        token: {
+          // Seed Token
+          colorPrimary: "#e85fed",
+          colorLink: "#e85fed",
+          // borderRadius: 2,
+          // Alias Token
+          // colorBgContainer: "#f6ffed",
+        },
+      }}
+    >
+      <AuthProvider>
         <BrowserRouter>
-          <Header className="full-width-container" />
+          {/* <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/product/:id" element={<Product />} />
+            </Routes> */}
 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/add-product" element={<AddProduct />} />
-            <Route path="/product/:id" element={<Product />} />
+            {/* Публичные страницы */}
+            <Route path="/auth" element={<AuthPage />} />
+
+            {/* Защищённые страницы с layout-обёрткой */}
+            <Route element={<RequireAuth />}>
+              <Route element={<ProtectedLayout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/add-product" element={<AddProductPage />} />
+                <Route path="/product/:id" element={<ProductPage />} />
+              </Route>
+            </Route>
+
+            {/* Фолбэк: редиректим на главную или login */}
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </BrowserRouter>
-      </ConfigProvider>
-    </div>
+      </AuthProvider>
+    </ConfigProvider>
   );
 }
 

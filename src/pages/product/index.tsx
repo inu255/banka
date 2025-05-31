@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 const { Text, Title } = Typography;
 
-export default function Product() {
+export default function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product>();
 
