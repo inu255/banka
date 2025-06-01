@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { Button, Form, message, type FormProps } from "antd";
+
 import { Product, type ProductType as ProductForm } from "src/entities/product";
 import { InteractBrand } from "src/features/interact-brand";
 import { InteractCategory } from "src/features/interact-category";
@@ -8,7 +9,6 @@ import { InteractName } from "src/features/interact-name";
 import { InteractOpenDate } from "src/features/interact-open-date";
 import { addProduct } from "src/features/product";
 import { useAuth } from "src/shared/lib/auth";
-
 import { type Product as ProductType } from "src/shared/types";
 
 export default function AddProductPage() {
@@ -39,13 +39,13 @@ export default function AddProductPage() {
   });
 
   const onFinish: FormProps<ProductForm>["onFinish"] = async (values) => {
-    // console.log("Success:", values);
+    console.log("Success:", values);
 
     mutate({
-      brandId: Number(values.brand),
+      brandId: values.brand,
       name: values.name,
       openDate: values.openDate.valueOf(),
-      categoryId: Number(values.category),
+      categoryId: values.category,
       // TODO: нужно хранить сразу в base64, но в инпуте картинки не работает. Надо разобраться и пофиксить
       image: values.image ? await getCompressedBase64(values.image.file) : "",
     });

@@ -1,17 +1,15 @@
 import { Spin, Tabs, type TabsProps } from "antd";
-import { useLiveQuery } from "dexie-react-hooks";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductCard } from "src/entities/product-card";
-import { db as db2 } from "src/shared/lib/db";
 
 import { useQuery } from "@tanstack/react-query";
+import { getCategories } from "src/features/interact-category";
 import { getProducts } from "src/features/product";
 import { useAuth } from "src/shared/lib/auth";
 import styles from "./styles.module.css";
 
 export default function HomePage() {
-  const [activeTabKey, setActiveTabKey] = useState("1");
-  const categories = useLiveQuery(() => db2.categories.toArray());
+  const [activeTabKey, setActiveTabKey] = useState<string>("1");
 
   const { user } = useAuth();
 
@@ -25,16 +23,23 @@ export default function HomePage() {
     enabled: user !== null,
   });
 
-  const items: TabsProps["items"] = useMemo(
-    () =>
-      categories?.map((item) => ({
-        key: String(item?.id),
-        label: item?.name,
+  const { data: categories, isLoading: isLoadingProducts } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+    select: (data) =>
+      data.map((item) => ({
+        key: item.id,
+        label: item.name,
       })),
-    [categories]
-  );
+  });
 
-  if (isLoading) {
+  useEffect(() => {
+    if (categories?.[0].key) {
+      setActiveTabKey(categories[0].key);
+    }
+  }, [categories]);
+
+  if (isLoading && isLoadingProducts) {
     return <Spin size="large" fullscreen />;
   }
 
@@ -42,14 +47,17 @@ export default function HomePage() {
     return "error"; // TODO
   }
 
+  if (products?.length === 0) {
+    return "Ничего не найдено";
+  }
+
   return (
     <div className={styles.container}>
       <Tabs
         tabBarStyle={{ marginBottom: 0, padding: "0 15px" }}
         className={styles.tabs}
-        defaultActiveKey="1"
         activeKey={activeTabKey}
-        items={items}
+        items={categories as TabsProps["items"]}
         onChange={(value) => setActiveTabKey(value)}
       />
 
