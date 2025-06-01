@@ -1,38 +1,29 @@
-import { Tabs, type TabsProps } from "antd";
+import { Spin, Tabs, type TabsProps } from "antd";
 import { useLiveQuery } from "dexie-react-hooks";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ProductCard } from "src/entities/product-card";
 import { db as db2 } from "src/shared/lib/db";
 
-import styles from "./styles.module.css";
-import type { User } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "src/shared/config/firebase";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "src/features/product";
 import { useAuth } from "src/shared/lib/auth";
-
-export const getProducts = async (user: User) => {
-  const ref = collection(db, "users", user.uid, "products");
-  const snapshot = await getDocs(ref);
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-};
+import styles from "./styles.module.css";
 
 export default function HomePage() {
   const [activeTabKey, setActiveTabKey] = useState("1");
   const categories = useLiveQuery(() => db2.categories.toArray());
-  // const products = useLiveQuery(() => db.products.toArray());
-  const [products, setProducts] = useState();
 
   const { user } = useAuth();
 
-  useEffect(() => {
-    async function qq() {
-      const products11 = user !== null ? await getProducts(user) : [];
-
-      setProducts(products11);
-    }
-
-    qq();
-  }, []);
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => user && getProducts(user),
+    enabled: user !== null,
+  });
 
   const items: TabsProps["items"] = useMemo(
     () =>
@@ -43,7 +34,13 @@ export default function HomePage() {
     [categories]
   );
 
-  console.log(products);
+  if (isLoading) {
+    return <Spin size="large" fullscreen />;
+  }
+
+  if (isError) {
+    return "error"; // TODO
+  }
 
   return (
     <div className={styles.container}>

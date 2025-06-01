@@ -4,11 +4,12 @@ import { useState } from "react";
 type Props = {
   title: string;
   isOpen: boolean;
+  isLoading: boolean;
   onClose: () => void;
   onAdd: (value: string) => void;
 };
 
-export function Prop({ title, isOpen, onClose, onAdd }: Props) {
+export function Prop({ title, isOpen, isLoading, onClose, onAdd }: Props) {
   const [value, setValue] = useState("");
 
   return (
@@ -24,11 +25,12 @@ export function Prop({ title, isOpen, onClose, onAdd }: Props) {
       <Flex gap={8}>
         <Input
           style={{ flex: 1 }}
+          disabled={isLoading}
           value={value}
           placeholder="Введи название"
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button type="primary" onClick={() => onAdd(value)}>
+        <Button loading={isLoading} type="primary" onClick={() => onAdd(value)}>
           Добавить
         </Button>
       </Flex>

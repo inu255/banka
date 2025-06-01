@@ -1,67 +1,68 @@
 import { PlusOutlined } from "@ant-design/icons";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Flex, Form, message, Select } from "antd";
-import { useLiveQuery } from "dexie-react-hooks";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import type { ProductType } from "src/entities/product";
 import { Prop } from "src/entities/prop";
-import { db } from "src/shared/lib/db";
+import { addBrand, getBrands } from "./api";
 
 export function InteractBrand() {
+  const queryClient = useQueryClient();
+
   const [isAddingModalOpen, setIsAddingModalOpen] = useState(false);
-  const brands = useLiveQuery(() => db.brands.toArray());
+
   const [messageApi, contextHolder] = message.useMessage();
 
-  const transformedBrands = useMemo(
-    () =>
-      brands?.map((item) => ({
+  const { data: products } = useQuery({
+    queryKey: ["brands"],
+    queryFn: getBrands,
+    select: (data) =>
+      data.map((item) => ({
         value: item.id,
         label: item.name,
       })),
-    [brands]
-  );
+  });
 
-  async function createBrand(brand: string) {
-    try {
-      await db.brands.add({ name: brand });
+  const { mutate, isPending } = useMutation({
+    mutationFn: (name: string) => addBrand(name),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["brands"] });
 
       messageApi.open({
         type: "success",
-        content: `Бренд ${brand} успешно добавлен`,
+        content: `Бренд успешно добавлен`,
       });
+
       setIsAddingModalOpen(false);
-    } catch (error) {
-      console.error(error);
+    },
+    onError: (error) => {
       messageApi.open({
         type: "error",
-        content: "Ошибка добавления",
+        content: `Ошибка добавления: ${error}`,
       });
-    }
-  }
+    },
+  });
 
   return (
-    <div>
+    <>
       {contextHolder}
       <Flex gap={8}>
         <Form.Item<ProductType>
-          //   label="Название"
           name="brand"
           style={{ flex: 1 }}
           rules={[{ required: true, message: "Выбери бренд!" }]}
         >
-          <Select
-            // style={{ width: 120 }}
-            placeholder="Выбери бренд"
-            options={transformedBrands}
-          />
+          <Select placeholder="Выбери бренд" options={products} />
         </Form.Item>
-        <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsAddingModalOpen(true)} />
+        <Button icon={<PlusOutlined />} onClick={() => setIsAddingModalOpen(true)} />
       </Flex>
       <Prop
+        isLoading={isPending}
         title="Добавить бренд"
         isOpen={isAddingModalOpen}
         onClose={() => setIsAddingModalOpen(false)}
-        onAdd={createBrand}
+        onAdd={mutate}
       />
-    </div>
+    </>
   );
 }

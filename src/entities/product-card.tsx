@@ -1,7 +1,8 @@
 import { Card, Image, Typography } from "antd";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useNavigate } from "react-router";
-import { db, type Product } from "src/shared/lib/db";
+import { db } from "src/shared/lib/db";
+import type { Product } from "src/shared/types";
 
 const { Title, Text } = Typography;
 

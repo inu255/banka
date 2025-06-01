@@ -1,6 +1,7 @@
 import { ConfigProvider } from "antd";
 import dayjs from "dayjs";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import AddProductPage from "src/pages/add-product";
 import HomePage from "src/pages/home";
@@ -16,6 +17,8 @@ import { ProtectedLayout } from "./ProtectedLayout";
 import "./index.css";
 
 dayjs.locale("ru-ru");
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -34,32 +37,34 @@ function App() {
         },
       }}
     >
-      <AuthProvider>
-        <BrowserRouter>
-          {/* <Routes>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <BrowserRouter>
+            {/* <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/add-product" element={<AddProduct />} />
               <Route path="/product/:id" element={<Product />} />
             </Routes> */}
 
-          <Routes>
-            {/* Публичные страницы */}
-            <Route path="/auth" element={<AuthPage />} />
+            <Routes>
+              {/* Публичные страницы */}
+              <Route path="/auth" element={<AuthPage />} />
 
-            {/* Защищённые страницы с layout-обёрткой */}
-            <Route element={<RequireAuth />}>
-              <Route element={<ProtectedLayout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/add-product" element={<AddProductPage />} />
-                <Route path="/product/:id" element={<ProductPage />} />
+              {/* Защищённые страницы с layout-обёрткой */}
+              <Route element={<RequireAuth />}>
+                <Route element={<ProtectedLayout />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/add-product" element={<AddProductPage />} />
+                  <Route path="/product/:id" element={<ProductPage />} />
+                </Route>
               </Route>
-            </Route>
 
-            {/* Фолбэк: редиректим на главную или login */}
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+              {/* Фолбэк: редиректим на главную или login */}
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </QueryClientProvider>
     </ConfigProvider>
   );
 }
