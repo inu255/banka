@@ -19,8 +19,8 @@ export default function AddProductPage() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (formValue: Omit<ProductType, "id">) => addProduct(String(user?.uid), formValue),
-    onSuccess: (result) => {
-      console.log(result);
+    onSuccess: () => {
+      // console.log(result);
       // queryClient.invalidateQueries({ queryKey: ["brands"] });
 
       messageApi.open({
@@ -39,13 +39,19 @@ export default function AddProductPage() {
   });
 
   const onFinish: FormProps<ProductForm>["onFinish"] = async (values) => {
-    console.log("Success:", values);
+    // console.log("Success:", values);
 
     mutate({
-      brandId: values.brand,
+      brand: {
+        id: values.brand.value,
+        name: values.brand.label,
+      },
+      category: {
+        id: values.category.value,
+        name: values.category.label,
+      },
       name: values.name,
       openDate: values.openDate.valueOf(),
-      categoryId: values.category,
       // TODO: нужно хранить сразу в base64, но в инпуте картинки не работает. Надо разобраться и пофиксить
       image: values.image ? await getCompressedBase64(values.image.file) : "",
     });

@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { Button, Flex, Image, Space, Spin, Typography } from "antd";
 import dayjs from "dayjs";
-import { db, type Product } from "src/shared/lib/db";
-import { Button, Flex, Image, Space, Typography } from "antd";
-import { Product as ProductEntity } from "src/entities/product";
+import { useParams } from "react-router";
 
+import { getProductById, Product as ProductEntity } from "src/entities/product";
+import { useAuth } from "src/shared/lib/auth";
 import styles from "./styles.module.css";
 
 const { Text, Title } = Typography;
 
 export default function ProductPage() {
   const { id } = useParams();
-  const [product, setProduct] = useState<Product>();
+  const { user } = useAuth();
 
-  console.log(product);
+  const { data: product, isLoading } = useQuery({
+    queryKey: ["products", id],
+    queryFn: () => user && getProductById(id, user),
+    enabled: user !== null && id !== undefined,
+  });
 
-  useEffect(() => {
-    db.products.get(Number(id)).then((value) => setProduct(value));
-  }, [id]);
+  if (isLoading) {
+    return <Spin size="large" fullscreen />;
+  }
 
   return (
     <Space direction="vertical">
@@ -36,7 +40,7 @@ export default function ProductPage() {
             <Title style={{ marginBottom: 0 }} level={4}>
               Бренд
             </Title>
-            <Text className={styles.text}>{product?.brandId}</Text>
+            <Text className={styles.text}>{product?.brand.name}</Text>
           </div>
         }
         category={
@@ -44,7 +48,7 @@ export default function ProductPage() {
             <Title style={{ marginBottom: 0 }} level={4}>
               Категория
             </Title>
-            <Text className={styles.text}>{product?.categoryId}</Text>
+            <Text className={styles.text}>{product?.category.name}</Text>
           </div>
         }
         openDate={

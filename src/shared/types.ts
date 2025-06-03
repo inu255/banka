@@ -1,8 +1,14 @@
 export interface Product {
   id?: string;
   name: string;
-  brandId: string;
-  categoryId: string;
+  brand: {
+    id: string;
+    name: string;
+  };
+  category: {
+    id: string;
+    name: string;
+  };
   openDate: string;
   image?: string;
 }

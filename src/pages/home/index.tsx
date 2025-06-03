@@ -63,7 +63,7 @@ export default function HomePage() {
 
       <div className={styles.grid}>
         {products
-          ?.filter((product) => String(product.categoryId) === activeTabKey)
+          ?.filter((product) => String(product.category?.id) === activeTabKey)
           .map((product, index) => (
             <ProductCard {...product} key={index} />
           ))}

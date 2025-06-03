@@ -71,7 +71,7 @@ export function InteractCategory() {
           style={{ flex: 1 }}
           rules={[{ required: true, message: "Выбери категорию!" }]}
         >
-          <Select placeholder="Выбери категорию" options={categories} />
+          <Select labelInValue placeholder="Выбери категорию" options={categories} />
         </Form.Item>
         <Button icon={<PlusOutlined />} onClick={() => setIsAddingModalOpen(true)} />
       </Flex>

@@ -1,13 +1,10 @@
 import { Card, Image, Typography } from "antd";
-import { useLiveQuery } from "dexie-react-hooks";
 import { useNavigate } from "react-router";
-import { db } from "src/shared/lib/db";
 import type { Product } from "src/shared/types";
 
 const { Title, Text } = Typography;
 
-export function ProductCard({ brandId, name, image, id }: Product) {
-  const brand = useLiveQuery(() => db.categories.toArray())?.find((item) => item.id === brandId);
+export function ProductCard({ brand, name, image, id }: Product) {
   const navigate = useNavigate();
 
   return (
