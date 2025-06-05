@@ -42,24 +42,6 @@ export function InteractCategory() {
     },
   });
 
-  // async function createCategory(category: string) {
-  //   try {
-  //     await db.categories.add({ name: category });
-
-  //     messageApi.open({
-  //       type: "success",
-  //       content: `Категория ${category} успешно добавлен`,
-  //     });
-  //     setIsAddingModalOpen(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //     messageApi.open({
-  //       type: "error",
-  //       content: "Ошибка добавления",
-  //     });
-  //   }
-  // }
-
   return (
     <div>
       {contextHolder}

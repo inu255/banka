@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AddProductPage from "src/pages/add-product";
 import HomePage from "src/pages/home";
 import ProductPage from "src/pages/product";
+import ProfilePage from "src/pages/profile";
 
 import ruRU from "antd/locale/ru_RU";
 import "dayjs/locale/zh-cn";
@@ -56,6 +57,7 @@ function App() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/add-product" element={<AddProductPage />} />
                   <Route path="/product/:id" element={<ProductPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
                 </Route>
               </Route>
 
