@@ -4,6 +4,7 @@ import checker from "vite-plugin-checker";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  base: "/banka/",
   plugins: [
     react(),
     checker({
