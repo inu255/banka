@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "postbuild": "cp dist/index.html dist/404.html",
+    "deploy": "npm run build && npm run postbuild && gh-pages -d dist"
   },
   "homepage": "https://inu255.github.io/banka/",
   "dependencies": {
