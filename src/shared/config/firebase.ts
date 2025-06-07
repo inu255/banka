@@ -6,10 +6,10 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// КЛЮЧ FIREBASE НЕ ЯВЛЯЕТСЯ СЕКРЕТОМ
+// https://firebase.google.com/support/guides/security-checklist#:~:text=Because%20Cloud%20Functions%20reuses%20environments,just%20embed%20them%20in%20code.
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_KEY,
+  apiKey: "AIzaSyCCdDPeMKUcHTVxJAzCBNkMB4tlkTHhWp4",
   authDomain: "banka-ff77e.firebaseapp.com",
   projectId: "banka-ff77e",
   storageBucket: "banka-ff77e.firebasestorage.app",
