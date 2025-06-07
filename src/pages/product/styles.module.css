@@ -2,6 +2,9 @@
   width: 450px !important;
   aspect-ratio: 1/1;
   margin: 0 var(--negative-horizontal-frame) 8px;
+  object-fit: contain;
+  object-position: center;
+  background: var(--color-bg);
 
   @media (max-width: 450px) {
     width: 100vw !important;
@@ -14,4 +17,8 @@
 
 .actionButton {
   flex: 1;
+}
+
+.container {
+  padding-bottom: 15px;
 }

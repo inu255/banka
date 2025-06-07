@@ -1,4 +1,4 @@
-import { Spin, Tabs, type TabsProps } from "antd";
+import { Button, Empty, Spin, Tabs, Typography, type TabsProps } from "antd";
 import { useEffect, useState } from "react";
 import { ProductCard } from "src/entities/product-card";
 
@@ -7,10 +7,12 @@ import { getCategories } from "src/features/interact-category";
 import { getProducts } from "src/features/product";
 import { useAuth } from "src/shared/lib/auth";
 import styles from "./styles.module.css";
+import { PlusOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router";
 
 export default function HomePage() {
   const [activeTabKey, setActiveTabKey] = useState<string>("1");
-
+  const navigate = useNavigate();
   const { user } = useAuth();
 
   const {
@@ -34,10 +36,14 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    if (categories?.[0].key) {
+    if (categories?.[0]?.key) {
       setActiveTabKey(categories[0].key);
     }
   }, [categories]);
+
+  function handleAddPage() {
+    navigate("/add-product");
+  }
 
   if (isLoading && isLoadingProducts) {
     return <Spin size="large" fullscreen />;
@@ -48,7 +54,15 @@ export default function HomePage() {
   }
 
   if (products?.length === 0) {
-    return "Ничего не найдено";
+    return (
+      <div className={styles.empty}>
+        <Empty description={<Typography.Text>Продуктов пока нет</Typography.Text>}>
+          <Button icon={<PlusOutlined />} type="primary" onClick={handleAddPage}>
+            Добавить
+          </Button>
+        </Empty>
+      </div>
+    );
   }
 
   return (

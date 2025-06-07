@@ -25,7 +25,7 @@ export default function AddProductPage() {
 
       messageApi.open({
         type: "success",
-        content: `Бренд успешно добавлен`,
+        content: `Продукт успешно добавлен`,
       });
     },
     onError: (error) => {
@@ -70,6 +70,7 @@ export default function AddProductPage() {
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
         form={form}
+        style={{ paddingBottom: 15 }}
       >
         <Product
           image={<InteractImage />}

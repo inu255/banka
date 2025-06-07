@@ -14,13 +14,19 @@
   grid-template-columns: repeat(2, 1fr);
   gap: var(--horizontal-frame);
   margin-top: var(--horizontal-frame);
+  padding-bottom: 15px;
 }
 
 .tabs {
   background: white;
-
   margin: 0 var(--negative-horizontal-frame);
   max-width: calc(100% + var(--horizontal-frame) * 2);
-
   padding: 0 var(--negative-horizontal-frame);
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70%;
 }

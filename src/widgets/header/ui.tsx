@@ -1,5 +1,4 @@
 import type { ComponentProps } from "react";
-
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Flex, theme, Typography } from "antd";
 import { useNavigate } from "react-router";
@@ -19,8 +18,8 @@ export function Header({ ...props }: ComponentProps<"div">) {
   }
 
   return (
-    <header {...props}>
-      <Flex className={styles.header} justify="space-between" align="center">
+    <header {...props} className={styles.header}>
+      <Flex justify="space-between" align="center">
         <Typography.Title
           level={2}
           style={{ color: token.colorPrimary, marginBottom: 0 }}

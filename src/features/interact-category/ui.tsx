@@ -35,6 +35,8 @@ export function InteractCategory() {
       setIsAddingModalOpen(false);
     },
     onError: (error) => {
+      console.log(error);
+
       messageApi.open({
         type: "error",
         content: `Ошибка добавления: ${error}`,

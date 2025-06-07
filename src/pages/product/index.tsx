@@ -29,7 +29,7 @@ export default function ProductPage() {
 
   return (
     <>
-      <Space direction="vertical">
+      <Space className={styles.container} direction="vertical">
         <ProductEntity
           image={<Image alt="product" className={styles.image} src={product?.image} />}
           name={
