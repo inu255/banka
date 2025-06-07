@@ -21,7 +21,6 @@ dayjs.locale("ru-ru");
 
 const queryClient = new QueryClient();
 
-
 function App() {
   return (
     <ConfigProvider
@@ -41,7 +40,7 @@ function App() {
     >
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <BrowserRouter>
+          <BrowserRouter basename="/banka/">
             {/* <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/add-product" element={<AddProduct />} />

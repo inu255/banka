@@ -16,23 +16,31 @@ export default defineConfig({
       manifest: {
         name: "Banka",
         short_name: "Banka",
+        start_url: "/banka/",
         icons: [
           {
             src: "web-app-manifest-192x192.png",
             sizes: "192x192",
             type: "image/png",
-            purpose: "maskable",
+            purpose: "any maskable",
           },
           {
             src: "web-app-manifest-512x512.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "maskable",
+            purpose: "any maskable",
           },
         ],
-        theme_color: "#ffe7ff",
+        theme_color: "#fff",
         background_color: "#ffe7ff",
         display: "standalone",
+        scope: "/banka/",
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+      },
+      devOptions: {
+        enabled: false, // отключено для разработки
       },
     }),
   ],
