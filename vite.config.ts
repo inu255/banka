@@ -7,15 +7,12 @@ export default defineConfig({
   base: "/banka/",
   plugins: [
     react(),
-    checker({
-      typescript: true,
-    }),
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "apple-touch-icon.png"],
       manifest: {
-        name: "MyWebSite",
-        short_name: "MySite",
+        name: "Banka",
+        short_name: "Banka",
         icons: [
           {
             src: "/web-app-manifest-192x192.png",
@@ -35,6 +32,7 @@ export default defineConfig({
         display: "standalone",
       },
     }),
+    checker({ typescript: true, stylelint: false }),
   ],
   resolve: {
     alias: {

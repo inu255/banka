@@ -21,8 +21,6 @@ dayjs.locale("ru-ru");
 
 const queryClient = new QueryClient();
 
-console.log(import.meta.env.VITE_FIREBASE_KEY);
-
 
 function App() {
   return (
