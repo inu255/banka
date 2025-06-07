@@ -1,19 +1,16 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages (main/dist)
 
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -24,15 +21,15 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build project
+      - name: Build production bundle
         env:
           VITE_FIREBASE_KEY: ${{ secrets.VITE_FIREBASE_KEY }}
         run: yarn build
 
-      - name: Commit dist to main
+      - name: Commit and push dist folder
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add -f dist 
-          git commit -m "Update dist" || echo "No changes to commit"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -f dist
+          git diff --cached --quiet || git commit -m "Update dist folder [skip ci]"
           git push
