@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import checker from "vite-plugin-checker";
 import { VitePWA } from "vite-plugin-pwa";
-import path from "path";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   base: "/banka/",
@@ -34,10 +34,6 @@ export default defineConfig({
       },
     }),
     checker({ typescript: true, stylelint: false }),
+    tsconfigPaths(),
   ],
-  resolve: {
-    alias: {
-      src: path.resolve(__dirname, "src"),
-    },
-  },
 });
