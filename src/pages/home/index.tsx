@@ -2,30 +2,22 @@ import { Button, Empty, Spin, Tabs, Typography, type TabsProps } from "antd";
 import { useEffect, useState } from "react";
 import { ProductCard } from "src/entities/product-card";
 
-import { useQuery } from "@tanstack/react-query";
-import { getCategories } from "src/features/interact-category";
-import { getProducts } from "src/features/product";
-import { useAuth } from "src/shared/lib/auth";
-import styles from "./styles.module.css";
 import { PlusOutlined } from "@ant-design/icons";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
+import { getCategories } from "src/features/interact-category";
+import { getProductsByCategory } from "src/features/product";
+import styles from "./styles.module.css";
 
 export default function HomePage() {
-  const [activeTabKey, setActiveTabKey] = useState<string>("1");
+  const [activeTabKey, setActiveTabKey] = useState<string | undefined>();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const {
-    data: products,
-    isLoading,
-    isError,
+    data: categories,
+    isLoading: isLoadingCategories,
+    isSuccess,
   } = useQuery({
-    queryKey: ["products"],
-    queryFn: () => user && getProducts(user),
-    enabled: user !== null,
-  });
-
-  const { data: categories, isLoading: isLoadingProducts } = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
     select: (data) =>
@@ -34,6 +26,18 @@ export default function HomePage() {
         label: item.name,
       })),
   });
+
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["products", activeTabKey],
+    queryFn: () => getProductsByCategory(activeTabKey as string),
+    enabled: isSuccess && Boolean(activeTabKey),
+  });
+
+  console.log(categories, activeTabKey, products);
 
   useEffect(() => {
     if (categories?.[0]?.key) {
@@ -45,7 +49,7 @@ export default function HomePage() {
     navigate("/add-product");
   }
 
-  if (isLoading && isLoadingProducts) {
+  if (isLoading && isLoadingCategories) {
     return <Spin size="large" fullscreen />;
   }
 
@@ -53,10 +57,10 @@ export default function HomePage() {
     return "error"; // TODO
   }
 
-  if (products?.length === 0) {
+  if (categories?.length === 0) {
     return (
       <div className={styles.empty}>
-        <Empty description={<Typography.Text>Продуктов пока нет</Typography.Text>}>
+        <Empty description={<Typography.Text>Ничего пока нет</Typography.Text>}>
           <Button icon={<PlusOutlined />} type="primary" onClick={handleAddPage}>
             Добавить
           </Button>
@@ -76,11 +80,9 @@ export default function HomePage() {
       />
 
       <div className={styles.grid}>
-        {products
-          ?.filter((product) => String(product.category?.id) === activeTabKey)
-          .map((product, index) => (
-            <ProductCard {...product} key={index} />
-          ))}
+        {products?.map((product, index) => (
+          <ProductCard {...product} key={index} />
+        ))}
       </div>
     </div>
   );

@@ -7,11 +7,11 @@ import AddProductPage from "src/pages/add-product";
 import HomePage from "src/pages/home";
 import ProductPage from "src/pages/product";
 import ProfilePage from "src/pages/profile";
+import AuthPage from "src/pages/auth";
 
 import ruRU from "antd/locale/ru_RU";
 import "dayjs/locale/zh-cn";
 
-import AuthPage from "src/pages/auth";
 import { AuthProvider, RequireAuth } from "src/shared/lib/auth";
 import { ProtectedLayout } from "./ProtectedLayout";
 
