@@ -3,7 +3,7 @@ import { Header } from "src/widgets/header";
 
 export const ProtectedLayout = () => {
   return (
-    <div className="container">
+    <div className="root-container">
       <Header className="full-width-container" />
 
       <main style={{ height: "100%" }}>

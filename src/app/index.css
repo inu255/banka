@@ -19,7 +19,7 @@
   --color-bg: #ffe7ff;
 }
 
-.container {
+.root-container {
   max-width: 450px;
   margin: 0 auto;
   height: 100vh;
