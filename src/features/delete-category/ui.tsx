@@ -1,10 +1,10 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { App, Button, Drawer, Flex, Result } from "antd";
 
-import styles from "./styles.module.css";
-import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { deleteCategory } from "./api";
+import styles from "./styles.module.css";
 
 type Props = { id: string };
 
@@ -15,7 +15,8 @@ export function DeleteCategory({ id }: Props) {
   const { mutate, isPending } = useMutation({
     mutationFn: (id: string) => deleteCategory(id),
     onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["brands"] });
+      //   queryClient.invalidateQueries({ queryKey: ["categories"] });
+      window.location.reload(); // TODO: refetch
 
       message.open({
         type: "success",
