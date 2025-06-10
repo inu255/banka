@@ -4,25 +4,16 @@
 
   background: var(--color-bg);
 
-  padding: 0 var(--horizontal-frame);
-
   min-height: 100%;
   height: 80vh;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--horizontal-frame);
-  margin-top: var(--horizontal-frame);
-  padding-bottom: 15px;
+  overflow-x: hidden;
 }
 
 .tabs {
   background: white;
   margin: 0 var(--negative-horizontal-frame);
   max-width: calc(100% + var(--horizontal-frame) * 2);
-  padding: 0 var(--negative-horizontal-frame);
+  padding: 0 calc(var(--horizontal-frame) * 2);
 }
 
 .empty {
@@ -30,15 +21,4 @@
   align-items: center;
   justify-content: center;
   height: 70%;
-}
-
-.swiperContainer {
-  flex: 1 1 auto;
-  height: 100%;
-  overflow: hidden;
-}
-
-.slide {
-  height: 100%;
-  overflow-y: auto;
 }

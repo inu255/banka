@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--horizontal-frame);
+  margin-top: var(--horizontal-frame);
+  padding: 0 var(--horizontal-frame);
+  padding-bottom: 15px;
+}
+
+.swiperContainer {
+  flex: 1 1 auto;
+  height: 100%;
+  overflow: hidden;
+}
