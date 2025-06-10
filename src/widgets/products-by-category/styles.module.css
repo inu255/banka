@@ -10,5 +10,5 @@
 .swiperContainer {
   flex: 1 1 auto;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }

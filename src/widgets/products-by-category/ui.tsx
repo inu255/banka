@@ -57,7 +57,7 @@ export function ProductByCategory({ swiperRef, categories, activeTabKey, setActi
       spaceBetween={10}
     >
       {categories?.map((category) => (
-        <SwiperSlide key={category.key} style={{ overflow: "hidden" }}>
+        <SwiperSlide key={category.key} style={{ minHeight: "100vh", overflowY: "auto" }}>
           {data && data.length > 0 ? (
             <div className={styles.grid}>
               {activeTabKey === category.key &&

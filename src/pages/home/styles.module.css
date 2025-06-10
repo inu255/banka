@@ -1,11 +1,10 @@
 .container {
   margin: 0 var(--negative-horizontal-frame);
   max-width: calc(100% + var(--horizontal-frame) * 2);
-
   background: var(--color-bg);
 
   min-height: 100%;
-  height: 80vh;
+  /* height: 80vh; */
   overflow-x: hidden;
 }
 
