@@ -1,6 +1,5 @@
+import { Flex, theme, Typography } from "antd";
 import type { ComponentProps } from "react";
-import { PlusOutlined } from "@ant-design/icons";
-import { Button, Flex, theme, Typography } from "antd";
 import { useNavigate } from "react-router";
 import styles from "./styles.module.css";
 
@@ -9,9 +8,9 @@ export function Header({ ...props }: ComponentProps<"div">) {
   const { token } = useToken();
   const navigate = useNavigate();
 
-  function handleAddPage() {
-    navigate("/add-product");
-  }
+  // function handleAddPage() {
+  //   navigate("/add-product");
+  // }
 
   function handleHomePage() {
     navigate("/");
@@ -27,9 +26,9 @@ export function Header({ ...props }: ComponentProps<"div">) {
         >
           BANKA
         </Typography.Title>
-        <Button icon={<PlusOutlined />} type="link" onClick={handleAddPage}>
+        {/* <Button icon={<PlusOutlined />} type="link" onClick={handleAddPage}>
           Добавить
-        </Button>
+        </Button> */}
       </Flex>
     </header>
   );

@@ -17,6 +17,7 @@
   --negative-horizontal-frame: calc(var(--horizontal-frame) * -1);
 
   --color-bg: #ffe7ff;
+  --color-primary: #e85fed;
 }
 
 .root-container {

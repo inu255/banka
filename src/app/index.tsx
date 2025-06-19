@@ -11,7 +11,7 @@ import ProfilePage from "src/pages/profile";
 import AuthPage from "src/pages/auth";
 
 import ruRU from "antd/locale/ru_RU";
-import "dayjs/locale/zh-cn";
+import "dayjs/locale/ru";
 
 import { AuthProvider, RequireAuth } from "src/shared/lib/auth";
 import { ProtectedLayout } from "./ProtectedLayout";

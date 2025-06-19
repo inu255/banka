@@ -1,0 +1,38 @@
+.wrapper {
+  padding-bottom: 60px;
+  margin: 0 var(--negative-horizontal-frame);
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  /* TODO: colors */
+  border-top: 1px solid #eee;
+  background-color: #fff;
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.tabItem {
+  flex: 1;
+  text-align: center;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+}
+
+.active {
+  color: var(--color-primary);
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.label {
+  margin-top: 2px;
+  color: inherit;
+}
