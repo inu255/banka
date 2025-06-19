@@ -1,25 +1,22 @@
 import { Button, Empty, Spin, Tabs, Typography, type TabsProps } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import type { Swiper as SwiperType } from "swiper";
 
 import { PlusOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { getCategories } from "src/features/interact-category";
 import { ProductByCategory } from "src/widgets/products-by-category";
 import styles from "./styles.module.css";
 
 export default function HomePage() {
-  const [activeTabKey, setActiveTabKey] = useState<string | undefined>();
   const swiperRef = useRef<SwiperType>(null);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTabKey = searchParams.get("tab");
 
-  const {
-    data: categories,
-    isLoading: isLoadingCategories,
-    // isSuccess,
-  } = useQuery({
+  const { data: categories, isLoading: isLoadingCategories } = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
     select: (data) =>
@@ -27,20 +24,24 @@ export default function HomePage() {
         key: item.id,
         label: item.name,
       })),
+    staleTime: 1000 * 60 * 5,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
-    if (categories?.[0]?.key) {
-      setActiveTabKey(categories[0].key);
+    if (!activeTabKey && categories?.[0]?.key) {
+      setSearchParams({ tab: categories[0].key });
     }
-  }, [categories]);
+  }, [categories, activeTabKey, setSearchParams]);
 
   function handleAddPage() {
     navigate("/add-product");
   }
 
   function handleTabChange(key: string) {
-    setActiveTabKey(key);
+    setSearchParams({ tab: key });
+
     const index = categories?.findIndex((item) => item.key === key);
     if (swiperRef.current && index !== undefined && index >= 0) {
       swiperRef.current.slideTo(index);
@@ -68,17 +69,12 @@ export default function HomePage() {
       <Tabs
         tabBarStyle={{ marginBottom: 0, padding: "0" }}
         className={styles.tabs}
-        activeKey={activeTabKey}
+        activeKey={activeTabKey ?? categories?.[0]?.key}
         items={categories as TabsProps["items"]}
         onChange={handleTabChange}
       />
 
-      <ProductByCategory
-        activeTabKey={activeTabKey}
-        categories={categories}
-        swiperRef={swiperRef}
-        setActiveTabKey={setActiveTabKey}
-      />
+      <ProductByCategory categories={categories} swiperRef={swiperRef} />
     </div>
   );
 }

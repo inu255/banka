@@ -1,15 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
+import type { RefObject } from "react";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useQuery } from "@tanstack/react-query";
-import type { Dispatch, RefObject, SetStateAction } from "react";
 import "swiper/swiper-bundle.css";
 
 import { ProductCard } from "src/entities/product-card";
 import { getProductsByCategory } from "src/features/product";
 import { LoaderContainer } from "src/shared/ui/loader-container";
 
-import styles from "./styles.module.css";
+import { useSearchParams } from "react-router";
 import { DeleteCategory } from "src/features/delete-category";
+import styles from "./styles.module.css";
 
 type Props = {
   swiperRef: RefObject<SwiperType | null>;
@@ -19,11 +20,13 @@ type Props = {
         label: string;
       }[]
     | undefined;
-  activeTabKey: string | undefined;
-  setActiveTabKey: Dispatch<SetStateAction<string | undefined>>;
 };
 
-export function ProductByCategory({ swiperRef, categories, activeTabKey, setActiveTabKey }: Props) {
+export function ProductByCategory({ swiperRef, categories }: Props) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const activeTabKey = searchParams.get("tab");
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products", activeTabKey],
     queryFn: () => getProductsByCategory(activeTabKey as string),
@@ -33,7 +36,7 @@ export function ProductByCategory({ swiperRef, categories, activeTabKey, setActi
   function handleSwiperChange(swiper: SwiperType) {
     const newTab = categories?.[swiper.activeIndex];
     if (newTab && newTab.key !== activeTabKey) {
-      setActiveTabKey(newTab.key);
+      setSearchParams({ tab: String(newTab.key) });
     }
   }
 
