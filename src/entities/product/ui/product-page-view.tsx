@@ -9,7 +9,7 @@ type Props = {
   image?: ReactNode;
 };
 
-export function Product({ name, brand, category, openDate, image }: Props) {
+export function ProductPageView({ name, brand, category, openDate, image }: Props) {
   return (
     <Space direction="vertical" style={{ width: "100%" }}>
       {image}

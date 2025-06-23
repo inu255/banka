@@ -4,22 +4,23 @@ import type { Dispatch, SetStateAction } from "react";
 
 import { deleteProductById } from "./api";
 import styles from "./style.module.css";
+import { useNavigate } from "react-router";
 
 type Props = { isOpen: boolean; setIsOpen: Dispatch<SetStateAction<boolean>>; id: string };
 
 export function DeleteProduct({ isOpen, setIsOpen, id }: Props) {
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (name: string) => deleteProductById(name),
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["brands"] });
-
       messageApi.open({
         type: "success",
         content: `Продукт удалён`,
       });
-
+      navigate("/", { replace: true });
       setIsOpen(false);
     },
     onError: (error) => {
@@ -39,7 +40,7 @@ export function DeleteProduct({ isOpen, setIsOpen, id }: Props) {
       {contextHolder}
       <Drawer
         destroyOnHidden
-        title={"Вы действительно хотите удалить продукт?"}
+        title={"Удалить продукт?"}
         placement={"bottom"}
         closable={true}
         onClose={onClose}

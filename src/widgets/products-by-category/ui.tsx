@@ -4,7 +4,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 
-import { ProductCard } from "src/entities/product-card";
+import { ProductCardView } from "src/entities/product";
 import { getProductsByCategory } from "src/features/product";
 import { LoaderContainer } from "src/shared/ui/loader-container";
 
@@ -60,11 +60,11 @@ export function ProductByCategory({ swiperRef, categories }: Props) {
       spaceBetween={10}
     >
       {categories?.map((category) => (
-        <SwiperSlide key={category.key} style={{ minHeight: "100vh", overflowY: "auto" }}>
+        <SwiperSlide key={category.key} className={styles.swiperSlide}>
           {data && data.length > 0 ? (
             <div className={styles.grid}>
               {activeTabKey === category.key &&
-                data?.map((product, index) => <ProductCard {...product} key={index} />)}
+                data?.map((product, index) => <ProductCardView {...product} key={index} />)}
             </div>
           ) : (
             <DeleteCategory id={String(activeTabKey)} />

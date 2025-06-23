@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { useParams } from "react-router";
 import { useState } from "react";
 
-import { getProductById, Product as ProductEntity } from "src/entities/product";
+import { getProductById, ProductPageView as ProductEntity } from "src/entities/product";
 import { DeleteProduct } from "src/features/delete-product";
 import { useAuth } from "src/shared/lib/auth";
 import styles from "./styles.module.css";

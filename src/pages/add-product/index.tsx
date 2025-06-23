@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { Button, Form, message, type FormProps } from "antd";
+import { useNavigate } from "react-router";
 
-import { Product, type ProductType as ProductForm } from "src/entities/product";
+import { ProductPageView, type ProductType as ProductForm } from "src/entities/product";
 import { InteractBrand } from "src/features/interact-brand";
 import { InteractCategory } from "src/features/interact-category";
 import { getCompressedBase64, InteractImage } from "src/features/interact-image";
@@ -14,19 +15,18 @@ import { type Product as ProductType } from "src/shared/types";
 export default function AddProductPage() {
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
-
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (formValue: Omit<ProductType, "id">) => addProduct(String(user?.uid), formValue),
     onSuccess: () => {
-      // console.log(result);
       // queryClient.invalidateQueries({ queryKey: ["brands"] });
-
       messageApi.open({
         type: "success",
         content: `Продукт успешно добавлен`,
       });
+      navigate("/", { replace: true });
     },
     onError: (error) => {
       console.log(error);
@@ -39,8 +39,6 @@ export default function AddProductPage() {
   });
 
   const onFinish: FormProps<ProductForm>["onFinish"] = async (values) => {
-    // console.log("Success:", values);
-
     mutate({
       brand: {
         id: values.brand.value,
@@ -72,7 +70,7 @@ export default function AddProductPage() {
         form={form}
         style={{ paddingBottom: 15 }}
       >
-        <Product
+        <ProductPageView
           image={<InteractImage />}
           name={<InteractName />}
           brand={<InteractBrand />}
