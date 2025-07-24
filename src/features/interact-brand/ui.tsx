@@ -1,10 +1,11 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Flex, Form, message, Select } from "antd";
+import { Button, Flex, Form, message } from "antd";
 import { useState } from "react";
 import type { ProductType } from "src/entities/product";
 import { Prop } from "src/entities/prop";
 import { addBrand, getBrands } from "./api";
+import { BottomSheetSelect } from "src/shared/ui/bottom-sheet-select";
 
 export function InteractBrand() {
   const queryClient = useQueryClient();
@@ -50,7 +51,7 @@ export function InteractBrand() {
           style={{ flex: 1 }}
           rules={[{ required: true, message: "Выбери бренд!" }]}
         >
-          <Select labelInValue placeholder="Выбери бренд" options={products} />
+          <BottomSheetSelect placeholder="Выбери бренд" options={products} />
         </Form.Item>
         <Button icon={<PlusOutlined />} onClick={() => setIsAddingModalOpen(true)} />
       </Flex>

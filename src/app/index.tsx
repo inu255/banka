@@ -28,6 +28,7 @@ function App() {
     <ConfigProvider
       locale={ruRU}
       componentSize="large"
+      getPopupContainer={() => document.getElementById("root-container")!}
       theme={{
         cssVar: true,
         token: {

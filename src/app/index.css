@@ -18,16 +18,25 @@
 
   --color-bg: #ffe7ff;
   --color-primary: #e85fed;
+
+  --desktop-width: 450px;
 }
 
-.root-container {
-  max-width: 450px;
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root-container {
+  overflow: auto;
+  max-width: var(--desktop-width);
   margin: 0 auto;
   height: 100vh;
   border-left: 1px solid rgb(239, 239, 239);
   border-right: 1px solid rgb(239, 239, 239);
   padding: 0 var(--horizontal-frame);
   min-height: 100%;
+  position: relative;
 
   @media (max-width: 450px) {
     border: none;
@@ -37,4 +46,13 @@
 .full-width-container {
   margin: 0 calc(var(--horizontal-frame) * -1);
   width: calc(100% + var(--horizontal-frame) * 2);
+}
+
+body:has(.ant-drawer-open) {
+  overflow: hidden;
+}
+
+.ant-drawer {
+  width: var(--desktop-width);
+  margin: 0 auto;
 }

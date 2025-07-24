@@ -14,12 +14,12 @@ export interface Product {
 }
 
 export interface Brand {
-  id?: string;
+  id: string;
   name: string;
 }
 
 export interface Category {
-  id?: string;
+  id: string;
   name: string;
 }
 

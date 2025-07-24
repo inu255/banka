@@ -1,7 +1,6 @@
-import React from "react";
+import { Typography } from "antd";
 import type { ReactNode } from "react";
 import styles from "./styles.module.css";
-import { Typography } from "antd";
 
 type TabItem = {
   key: string;
@@ -15,11 +14,7 @@ type BottomNavigationTabsProps = {
   onChange: (key: string) => void;
 };
 
-export const BottomNavigationTabs: React.FC<BottomNavigationTabsProps> = ({
-  tabs,
-  activeKey,
-  onChange,
-}) => {
+export function BottomNavigationTabs({ tabs, activeKey, onChange }: BottomNavigationTabsProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.navbar}>
@@ -41,4 +36,4 @@ export const BottomNavigationTabs: React.FC<BottomNavigationTabsProps> = ({
       </div>
     </div>
   );
-};
+}

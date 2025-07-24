@@ -1,9 +1,10 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Flex, Form, message, Select } from "antd";
+import { Button, Flex, Form, message } from "antd";
 import { useState } from "react";
 import type { ProductType } from "src/entities/product";
 import { Prop } from "src/entities/prop";
+import { BottomSheetSelect } from "src/shared/ui/bottom-sheet-select";
 import { addCategory, getCategories } from "./api";
 
 export function InteractCategory() {
@@ -55,7 +56,7 @@ export function InteractCategory() {
           style={{ flex: 1 }}
           rules={[{ required: true, message: "Выбери категорию!" }]}
         >
-          <Select labelInValue placeholder="Выбери категорию" options={categories} />
+          <BottomSheetSelect placeholder="Выбери категорию" options={categories} />
         </Form.Item>
         <Button icon={<PlusOutlined />} onClick={() => setIsAddingModalOpen(true)} />
       </Flex>

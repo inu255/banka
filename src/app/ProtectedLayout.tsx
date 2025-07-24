@@ -28,7 +28,7 @@ export const ProtectedLayout = () => {
   const activeKey = tabData.some((tab) => tab.key === pathname) ? pathname : "/";
 
   return (
-    <div className="root-container">
+    <div id="root-container">
       <Header className="full-width-container" />
 
       <main style={{ height: "100%" }}>

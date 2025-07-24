@@ -8,7 +8,7 @@
   margin: 0 calc(var(--horizontal-frame) * -1);
   /* width: calc(100% + var(--horizontal-frame) * 2); */
   background: var(--color-bg);
-  width: 450px;
+  width: calc(var(--desktop-width) - 2px);
 
   @media (max-width: 450px) {
     width: 100vw;

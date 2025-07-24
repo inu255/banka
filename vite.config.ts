@@ -49,4 +49,13 @@ export default defineConfig({
       src: "/src",
     },
   },
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+    hmr: {
+      host: "192.168.1.111",
+      protocol: "ws",
+      port: 5173,
+    },
+  },
 });
