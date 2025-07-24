@@ -25,13 +25,15 @@ export const ProtectedLayout = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  const activeKey = tabData.some((tab) => tab.key === pathname) ? pathname : "/";
+
   return (
     <div className="root-container">
       <Header className="full-width-container" />
 
       <main style={{ height: "100%" }}>
         <Outlet />
-        <BottomNavigationTabs tabs={tabData} activeKey={pathname} onChange={navigate} />
+        <BottomNavigationTabs tabs={tabData} activeKey={activeKey} onChange={navigate} />
       </main>
     </div>
   );

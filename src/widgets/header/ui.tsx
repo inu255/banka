@@ -1,16 +1,17 @@
-import { Flex, theme, Typography } from "antd";
+import { Button, Flex, theme, Typography } from "antd";
 import type { ComponentProps } from "react";
 import { useNavigate } from "react-router";
 import styles from "./styles.module.css";
+import { SearchOutlined } from "@ant-design/icons";
 
 export function Header({ ...props }: ComponentProps<"div">) {
   const { useToken } = theme;
   const { token } = useToken();
   const navigate = useNavigate();
 
-  // function handleAddPage() {
-  //   navigate("/add-product");
-  // }
+  function handleSearch() {
+    navigate("/search");
+  }
 
   function handleHomePage() {
     navigate("/");
@@ -26,9 +27,14 @@ export function Header({ ...props }: ComponentProps<"div">) {
         >
           BANKA
         </Typography.Title>
-        {/* <Button icon={<PlusOutlined />} type="link" onClick={handleAddPage}>
-          Добавить
-        </Button> */}
+        <Button
+          icon={<SearchOutlined />}
+          disabled
+          type="text"
+          onClick={handleSearch}
+          shape="circle"
+          size="large"
+        />
       </Flex>
     </header>
   );

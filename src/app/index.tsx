@@ -9,6 +9,7 @@ import HomePage from "src/pages/home";
 import ProductPage from "src/pages/product";
 import ProfilePage from "src/pages/profile";
 import AuthPage from "src/pages/auth";
+import SearchPage from "src/pages/search";
 
 import ruRU from "antd/locale/ru_RU";
 import "dayjs/locale/ru";
@@ -43,12 +44,6 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <BrowserRouter basename="/banka/">
-              {/* <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/add-product" element={<AddProduct />} />
-              <Route path="/product/:id" element={<Product />} />
-            </Routes> */}
-
               <Routes>
                 {/* Публичные страницы */}
                 <Route path="/auth" element={<AuthPage />} />
@@ -60,6 +55,7 @@ function App() {
                     <Route path="/add-product" element={<AddProductPage />} />
                     <Route path="/product/:id" element={<ProductPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/search" element={<SearchPage />} />
                   </Route>
                 </Route>
 
