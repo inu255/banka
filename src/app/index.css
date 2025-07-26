@@ -1,41 +1,27 @@
 @import "antd/dist/reset.css";
 
 :root {
-  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
   --horizontal-frame: 15px;
   --negative-horizontal-frame: calc(var(--horizontal-frame) * -1);
+  --desktop-width: 450px;
+  --header-height: 70px;
+  --navbar-height: 66px;
 
   --color-bg: #ffe7ff;
   --color-primary: #e85fed;
-
-  --desktop-width: 450px;
 }
 
 #root {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 #root-container {
-  overflow: auto;
   max-width: var(--desktop-width);
   margin: 0 auto;
-  height: 100vh;
+  height: 100%;
   border-left: 1px solid rgb(239, 239, 239);
   border-right: 1px solid rgb(239, 239, 239);
   padding: 0 var(--horizontal-frame);
-  min-height: 100%;
   position: relative;
 
   @media (max-width: 450px) {
@@ -55,4 +41,8 @@ body:has(.ant-drawer-open) {
 .ant-drawer {
   width: var(--desktop-width);
   margin: 0 auto;
+}
+
+.ant-drawer-body {
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
 }

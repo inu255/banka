@@ -1,10 +1,12 @@
-import { Button } from "antd";
+import { App, Button } from "antd";
 import { useNavigate } from "react-router";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "src/shared/config/firebase";
 
 export const AuthWithGoogle = () => {
   const navigate = useNavigate();
+  const { message } = App.useApp();
+
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -14,7 +16,10 @@ export const AuthWithGoogle = () => {
       return user;
     } catch (error) {
       console.error("Google sign-in error:", error);
-      alert("Ошибка"); // TODO
+      message.error({
+        content: "Ошибка входа через Google",
+      });
+
       throw error;
     }
   };

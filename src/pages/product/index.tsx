@@ -31,7 +31,14 @@ export default function ProductPage() {
     <>
       <Space className={styles.container} direction="vertical">
         <ProductEntity
-          image={<Image alt="product" className={styles.image} src={product?.image} />}
+          image={
+            <Image
+              alt="product"
+              className={styles.image}
+              src={product?.image}
+              preview={{ maskClassName: "full-width-container" }}
+            />
+          }
           name={
             <div>
               <Title style={{ marginBottom: 0 }} level={4}>

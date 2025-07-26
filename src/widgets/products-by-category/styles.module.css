@@ -7,13 +7,18 @@
   padding-bottom: 15px;
 }
 
-.swiperContainer {
-  flex: 1 1 auto;
+/* .swiper {
+  width: 100%;
   height: 100%;
+  position: relative;
+} */
+
+.swiperContainer {
+  /* flex: 1 1 auto; */
   overflow-x: hidden;
+  /* max-height: calc(100vh - var(--header-height) - var(--navbar-height)); */
 }
 
 .swiperSlide {
-  min-height: 100vh;
-  overflow-y: auto;
+  /* height: 100%; */
 }

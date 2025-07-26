@@ -1,6 +1,6 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Flex, Form, message } from "antd";
+import { App, Button, Flex, Form } from "antd";
 import { useState } from "react";
 import type { ProductType } from "src/entities/product";
 import { Prop } from "src/entities/prop";
@@ -10,7 +10,7 @@ import { BottomSheetSelect } from "src/shared/ui/bottom-sheet-select";
 export function InteractBrand() {
   const queryClient = useQueryClient();
   const [isAddingModalOpen, setIsAddingModalOpen] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
+  const { message } = App.useApp();
 
   const { data: products } = useQuery({
     queryKey: ["brands"],
@@ -27,7 +27,7 @@ export function InteractBrand() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["brands"] });
 
-      messageApi.open({
+      message.open({
         type: "success",
         content: `Бренд успешно добавлен`,
       });
@@ -35,7 +35,7 @@ export function InteractBrand() {
       setIsAddingModalOpen(false);
     },
     onError: (error) => {
-      messageApi.open({
+      message.open({
         type: "error",
         content: `Ошибка добавления: ${error}`,
       });
@@ -44,7 +44,6 @@ export function InteractBrand() {
 
   return (
     <>
-      {contextHolder}
       <Flex gap={8}>
         <Form.Item<ProductType>
           name="brand"

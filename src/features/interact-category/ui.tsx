@@ -1,6 +1,6 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Flex, Form, message } from "antd";
+import { App, Button, Flex, Form } from "antd";
 import { useState } from "react";
 import type { ProductType } from "src/entities/product";
 import { Prop } from "src/entities/prop";
@@ -10,8 +10,7 @@ import { addCategory, getCategories } from "./api";
 export function InteractCategory() {
   const queryClient = useQueryClient();
   const [isAddingModalOpen, setIsAddingModalOpen] = useState(false);
-  // const categories = useLiveQuery(() => db.categories.toArray());
-  const [messageApi, contextHolder] = message.useMessage();
+  const { message } = App.useApp();
 
   const { data: categories } = useQuery({
     queryKey: ["categories"],
@@ -28,7 +27,7 @@ export function InteractCategory() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
 
-      messageApi.open({
+      message.open({
         type: "success",
         content: `Категория успешно создана`,
       });
@@ -38,7 +37,7 @@ export function InteractCategory() {
     onError: (error) => {
       console.log(error);
 
-      messageApi.open({
+      message.open({
         type: "error",
         content: `Ошибка добавления: ${error}`,
       });
@@ -46,9 +45,7 @@ export function InteractCategory() {
   });
 
   return (
-    <div>
-      {contextHolder}
-
+    <>
       <Flex gap={8}>
         <Form.Item<ProductType>
           //   label="Название"
@@ -67,6 +64,6 @@ export function InteractCategory() {
         onClose={() => setIsAddingModalOpen(false)}
         onAdd={mutate}
       />
-    </div>
+    </>
   );
 }

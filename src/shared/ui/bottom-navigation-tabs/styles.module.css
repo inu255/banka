@@ -9,9 +9,8 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  /* TODO: colors */
-  border-top: 1px solid #eee;
-  background-color: #fff;
+  border-top: 1px solid var(--ant-color-border);
+  background-color: var(--ant-color-bg-base);
   padding-top: 8px;
   padding-bottom: calc(8px + env(safe-area-inset-bottom));
   z-index: 100;
@@ -24,7 +23,7 @@
 .tabItem {
   flex: 1;
   text-align: center;
-  color: #666;
+  color: var(--ant-color-text);
   cursor: pointer;
   user-select: none;
 }

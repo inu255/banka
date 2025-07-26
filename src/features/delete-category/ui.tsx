@@ -1,26 +1,36 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { App, Button, Drawer, Flex, Result } from "antd";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { deleteCategory } from "./api";
 import styles from "./styles.module.css";
+import type { Category } from "src/shared/types";
 
 type Props = { id: string };
 
 export function DeleteCategory({ id }: Props) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { message } = App.useApp();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (id: string) => deleteCategory(id),
-    onSuccess: () => {
-      //   queryClient.invalidateQueries({ queryKey: ["categories"] });
-      window.location.reload(); // TODO: refetch
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["categories"] });
+
+      // Получаем обновлённые категории
+      const categories = queryClient.getQueryData<Category[]>(["categories"]);
+      const firstCategoryKey = categories?.[0]?.id || "";
+
+      // Перенаправляем на / с первой категорией
+      navigate({ pathname: "/", search: `?tab=${firstCategoryKey}` }, { replace: true });
 
       message.open({
         type: "success",
-        content: `Продукт удалён`,
+        content: `Категория удалена`,
       });
 
       setIsDrawerOpen(false);

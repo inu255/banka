@@ -1,5 +1,5 @@
 import { Button, Empty, Spin, Tabs, Typography, type TabsProps } from "antd";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 
 import type { Swiper as SwiperType } from "swiper";
 
@@ -12,6 +12,8 @@ import styles from "./styles.module.css";
 
 export default function HomePage() {
   const swiperRef = useRef<SwiperType>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerHeight, setContainerHeight] = useState<number>(0);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTabKey = searchParams.get("tab");
@@ -34,6 +36,12 @@ export default function HomePage() {
       setSearchParams({ tab: categories[0].key });
     }
   }, [categories, activeTabKey, setSearchParams]);
+
+  useLayoutEffect(() => {
+    if (containerRef.current) {
+      setContainerHeight(containerRef.current.offsetHeight);
+    }
+  }, [categories, isLoadingCategories]);
 
   function handleAddPage() {
     navigate("/add-product");
@@ -65,16 +73,20 @@ export default function HomePage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <Tabs
-        tabBarStyle={{ marginBottom: 0, padding: "0" }}
+        tabBarStyle={{ marginBottom: 0 }}
         className={styles.tabs}
         activeKey={activeTabKey ?? categories?.[0]?.key}
         items={categories as TabsProps["items"]}
         onChange={handleTabChange}
       />
 
-      <ProductByCategory categories={categories} swiperRef={swiperRef} />
+      <ProductByCategory
+        categories={categories}
+        swiperRef={swiperRef}
+        containerHeight={containerHeight}
+      />
     </div>
   );
 }

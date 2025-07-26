@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { Button, Form, message, type FormProps } from "antd";
+import { App, Button, Form, type FormProps } from "antd";
 import { useNavigate } from "react-router";
 
 import { ProductPageView, type ProductType as ProductForm } from "src/entities/product";
@@ -13,7 +13,8 @@ import { useAuth } from "src/shared/lib/auth";
 import { type Product as ProductType } from "src/shared/types";
 
 export default function AddProductPage() {
-  const [messageApi, contextHolder] = message.useMessage();
+  const { message } = App.useApp();
+
   const [form] = Form.useForm();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function AddProductPage() {
     mutationFn: (formValue: Omit<ProductType, "id">) => addProduct(String(user?.uid), formValue),
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["brands"] });
-      messageApi.open({
+      message.open({
         type: "success",
         content: `Продукт успешно добавлен`,
       });
@@ -31,7 +32,7 @@ export default function AddProductPage() {
     onError: (error) => {
       console.log(error);
 
-      messageApi.open({
+      message.open({
         type: "error",
         content: `Ошибка добавления: ${error}`,
       });
@@ -56,34 +57,20 @@ export default function AddProductPage() {
   };
 
   return (
-    <>
-      {contextHolder}
-      <Form
-        name="product"
-        // labelCol={{ span: 8 }}
-        // wrapperCol={{ span: 16 }}
-        // style={{ maxWidth: 600 }}
-        initialValues={{}}
-        onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        form={form}
-        style={{ paddingBottom: 15 }}
-      >
-        <ProductPageView
-          image={<InteractImage />}
-          name={<InteractName />}
-          brand={<InteractBrand />}
-          category={<InteractCategory />}
-          openDate={<InteractOpenDate />}
-        />
+    <Form name="product" initialValues={{}} onFinish={onFinish} autoComplete="off" form={form}>
+      <ProductPageView
+        image={<InteractImage />}
+        name={<InteractName />}
+        brand={<InteractBrand />}
+        category={<InteractCategory />}
+        openDate={<InteractOpenDate />}
+      />
 
-        <Form.Item label={null}>
-          <Button loading={isPending} type="primary" htmlType="submit" style={{ width: "100%" }}>
-            Сохранить
-          </Button>
-        </Form.Item>
-      </Form>
-    </>
+      <Form.Item label={null}>
+        <Button loading={isPending} type="primary" htmlType="submit" style={{ width: "100%" }}>
+          Сохранить
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }

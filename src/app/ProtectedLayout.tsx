@@ -31,7 +31,7 @@ export const ProtectedLayout = () => {
     <div id="root-container">
       <Header className="full-width-container" />
 
-      <main style={{ height: "100%" }}>
+      <main>
         <Outlet />
         <BottomNavigationTabs tabs={tabData} activeKey={activeKey} onChange={navigate} />
       </main>

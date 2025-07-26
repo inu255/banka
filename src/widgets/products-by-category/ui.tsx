@@ -20,9 +20,10 @@ type Props = {
         label: string;
       }[]
     | undefined;
+  containerHeight: number;
 };
 
-export function ProductByCategory({ swiperRef, categories }: Props) {
+export function ProductByCategory({ swiperRef, categories, containerHeight }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const activeTabKey = searchParams.get("tab");
@@ -58,9 +59,14 @@ export function ProductByCategory({ swiperRef, categories }: Props) {
       }}
       onSlideChange={handleSwiperChange}
       spaceBetween={10}
+      style={{ minHeight: containerHeight - 70 }}
     >
       {categories?.map((category) => (
-        <SwiperSlide key={category.key} className={styles.swiperSlide}>
+        <SwiperSlide
+          key={category.key}
+          className={styles.swiperSlide}
+          style={{ minHeight: containerHeight - 70 }}
+        >
           {data && data.length > 0 ? (
             <div className={styles.grid}>
               {activeTabKey === category.key &&

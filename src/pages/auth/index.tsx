@@ -2,6 +2,7 @@ import { Typography } from "antd";
 import { AuthWithGoogle } from "src/features/auth-with-google";
 
 export default function AuthPage() {
+  // TODO
   return (
     <div
       style={{

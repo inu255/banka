@@ -23,6 +23,7 @@ dayjs.locale("ru-ru");
 
 const queryClient = new QueryClient();
 
+// TODO: error boundary
 function App() {
   return (
     <ConfigProvider
@@ -32,12 +33,12 @@ function App() {
       theme={{
         cssVar: true,
         token: {
-          // Seed Token
           colorPrimary: "#e85fed",
           colorLink: "#e85fed",
-          // borderRadius: 2,
-          // Alias Token
           // colorBgContainer: "#f6ffed",
+          // colorBgBase
+          // colorBorder
+          // colorWhite
         },
       }}
     >

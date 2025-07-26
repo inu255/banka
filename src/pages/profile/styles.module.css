@@ -1,0 +1,38 @@
+.container {
+  height: calc(100vh - var(--header-height) - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0 var(--horizontal-frame);
+  box-sizing: border-box;
+}
+
+.profileInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  margin-bottom: 24px;
+  background-color: var(--color-primary);
+}
+
+.avatar span {
+  font-size: 32px;
+}
+
+.title {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.email {
+  text-align: center;
+}
+
+.logoutBtn {
+  margin-top: 40px;
+}

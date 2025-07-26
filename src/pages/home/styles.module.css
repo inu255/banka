@@ -3,16 +3,17 @@
   max-width: calc(100% + var(--horizontal-frame) * 2);
   background: var(--color-bg);
 
-  min-height: 100%;
-  /* height: 80vh; */
-  overflow-x: hidden;
+  min-height: calc(100vh - var(--header-height) - var(--navbar-height));
+  height: fit-content;
 }
 
 .tabs {
-  background: white;
-  margin: 0 var(--negative-horizontal-frame);
-  max-width: calc(100% + var(--horizontal-frame) * 2);
+  background: var(--ant-color-white);
   padding: 0 calc(var(--horizontal-frame) * 2);
+  position: sticky;
+  top: var(--header-height);
+  z-index: 100;
+  padding: 0 var(--horizontal-frame);
 }
 
 .empty {
