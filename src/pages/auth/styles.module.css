@@ -8,6 +8,12 @@
   gap: 24px;
 }
 
-.image {
-  /* width: var(--desktop-width) !important; */
+.title {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.subtitle {
+  margin-top: -12px;
+  text-align: center;
 }

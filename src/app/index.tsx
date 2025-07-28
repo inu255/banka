@@ -35,6 +35,7 @@ function App() {
         token: {
           colorPrimary: "#e85fed",
           colorLink: "#e85fed",
+          colorText: "#555555",
           // colorBgContainer: "#f6ffed",
           // colorBgBase
           // colorBorder

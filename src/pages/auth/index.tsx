@@ -7,16 +7,11 @@ const { Title, Text } = Typography;
 export default function AuthPage() {
   return (
     <div className={`${styles.container} full-width-container`}>
-      <Image
-        alt="logo"
-        className={`${styles.image}`}
-        preview={false}
-        src="/banka/images/auth.png"
-      />
-      <Title level={2} style={{ marginBottom: 0, textAlign: "center", color: "#555555" }}>
+      <Image alt="logo" className={styles.image} preview={false} src="/banka/images/auth.png" />
+      <Title level={2} className={styles.title}>
         Добро пожаловать в Banka!
       </Title>
-      <Text style={{ marginTop: -12 }}>Войдите, чтобы воспользоваться приложением</Text>
+      <Text className={styles.subtitle}>Войдите, чтобы воспользоваться приложением</Text>
       <AuthWithGoogle />
     </div>
   );

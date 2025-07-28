@@ -26,7 +26,7 @@ export const AuthWithGoogle = () => {
   };
 
   return (
-    <Button icon={<GoogleOutlined />} type="primary" onClick={signInWithGoogle}>
+    <Button icon={<GoogleOutlined />} onClick={signInWithGoogle}>
       Войти через Google
     </Button>
   );
