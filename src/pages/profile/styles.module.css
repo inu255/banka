@@ -1,5 +1,5 @@
 .container {
-  height: calc(100vh - var(--header-height) - var(--navbar-height));
+  height: var(--page-height);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

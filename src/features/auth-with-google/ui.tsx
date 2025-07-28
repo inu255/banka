@@ -2,6 +2,7 @@ import { App, Button } from "antd";
 import { useNavigate } from "react-router";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "src/shared/config/firebase";
+import { GoogleOutlined } from "@ant-design/icons";
 
 export const AuthWithGoogle = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const AuthWithGoogle = () => {
   };
 
   return (
-    <Button type="primary" onClick={signInWithGoogle}>
+    <Button icon={<GoogleOutlined />} type="primary" onClick={signInWithGoogle}>
       Войти через Google
     </Button>
   );

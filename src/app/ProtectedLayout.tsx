@@ -28,7 +28,7 @@ export const ProtectedLayout = () => {
   const activeKey = tabData.some((tab) => tab.key === pathname) ? pathname : "/";
 
   return (
-    <div id="root-container">
+    <div>
       <Header className="full-width-container" />
 
       <main>

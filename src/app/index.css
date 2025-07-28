@@ -6,6 +6,7 @@
   --desktop-width: 450px;
   --header-height: 70px;
   --navbar-height: 66px;
+  --page-height: calc(100vh - var(--header-height) - var(--navbar-height));
 
   --color-bg: #ffe7ff;
   --color-primary: #e85fed;
@@ -19,8 +20,8 @@
   max-width: var(--desktop-width);
   margin: 0 auto;
   height: 100%;
-  border-left: 1px solid rgb(239, 239, 239);
-  border-right: 1px solid rgb(239, 239, 239);
+  border-left: 1px solid var(--ant-color-border);
+  border-right: 1px solid var(--ant-color-border);
   padding: 0 var(--horizontal-frame);
   position: relative;
 

@@ -45,26 +45,28 @@ function App() {
       <AntdApp>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <BrowserRouter basename="/banka/">
-              <Routes>
-                {/* Публичные страницы */}
-                <Route path="/auth" element={<AuthPage />} />
+            <div id="root-container">
+              <BrowserRouter basename="/banka/">
+                <Routes>
+                  {/* Публичные страницы */}
+                  <Route path="/auth" element={<AuthPage />} />
 
-                {/* Защищённые страницы с layout-обёрткой */}
-                <Route element={<RequireAuth />}>
-                  <Route element={<ProtectedLayout />}>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/add-product" element={<AddProductPage />} />
-                    <Route path="/product/:id" element={<ProductPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/search" element={<SearchPage />} />
+                  {/* Защищённые страницы с layout-обёрткой */}
+                  <Route element={<RequireAuth />}>
+                    <Route element={<ProtectedLayout />}>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/add-product" element={<AddProductPage />} />
+                      <Route path="/product/:id" element={<ProductPage />} />
+                      <Route path="/profile" element={<ProfilePage />} />
+                      <Route path="/search" element={<SearchPage />} />
+                    </Route>
                   </Route>
-                </Route>
 
-                {/* Фолбэк: редиректим на главную или login */}
-                <Route path="*" element={<Navigate to="/" />} />
-              </Routes>
-            </BrowserRouter>
+                  {/* Фолбэк: редиректим на главную или login */}
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+              </BrowserRouter>
+            </div>
           </AuthProvider>
         </QueryClientProvider>
       </AntdApp>

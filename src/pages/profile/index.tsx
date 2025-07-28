@@ -1,21 +1,28 @@
-import { Button, Avatar, Typography } from "antd";
+import { Button, Avatar, Typography, App } from "antd";
 import { signOut } from "firebase/auth";
 import { auth } from "src/shared/config/firebase";
 import styles from "./styles.module.css";
+import { useQueryClient } from "@tanstack/react-query";
 
 const { Title, Text } = Typography;
 
-const signOutUser = async () => {
-  try {
-    await signOut(auth);
-    console.log("User signed out");
-  } catch (error) {
-    console.error("Sign out error:", error);
-  }
-};
-
 export default function ProfilePage() {
   const user = auth.currentUser;
+  const queryClient = useQueryClient();
+  const { message } = App.useApp();
+
+  const signOutUser = async () => {
+    try {
+      await signOut(auth);
+      queryClient.clear();
+    } catch (error) {
+      console.error("Logout error", error);
+      message.open({
+        type: "error",
+        content: `Ошибка!`,
+      });
+    }
+  };
 
   const getInitials = () => {
     if (user?.displayName) {
@@ -44,14 +51,7 @@ export default function ProfilePage() {
           {user?.email || "Нет email"}
         </Text>
       </div>
-      <Button
-        type="primary"
-        danger
-        block
-        size="large"
-        className={styles.logoutBtn}
-        onClick={signOutUser}
-      >
+      <Button danger block size="large" className={styles.logoutBtn} onClick={signOutUser}>
         Выйти из аккаунта
       </Button>
     </div>

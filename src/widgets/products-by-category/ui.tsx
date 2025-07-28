@@ -11,6 +11,8 @@ import { LoaderContainer } from "src/shared/ui/loader-container";
 import { useSearchParams } from "react-router";
 import { DeleteCategory } from "src/features/delete-category";
 import styles from "./styles.module.css";
+import { Button, Result } from "antd";
+import { WarningOutlined } from "@ant-design/icons";
 
 type Props = {
   swiperRef: RefObject<SwiperType | null>;
@@ -41,12 +43,27 @@ export function ProductByCategory({ swiperRef, categories, containerHeight }: Pr
     }
   }
 
+  function handleRefresh() {
+    window.location.reload();
+  }
+
   if (isLoading) {
-    return <LoaderContainer />;
+    return <LoaderContainer height={containerHeight - 70} />;
   }
 
   if (isError) {
-    return "error"; // TODO
+    return (
+      <Result
+        icon={<WarningOutlined style={{ color: "var(--color-primary)" }} />}
+        title="Произошла ошибка!"
+        subTitle="Попробуйте обновить страницу."
+        extra={
+          <Button type="primary" onClick={handleRefresh}>
+            Обновить
+          </Button>
+        }
+      />
+    );
   }
 
   return (
