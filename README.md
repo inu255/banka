@@ -1,54 +1,115 @@
-# React + TypeScript + Vite
+# Banka 💄
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для учёта декоративной и уходовой косметики. Помогает наглядно видеть, что есть в косметичке, а также отслеживать сроки годности вскрытых средств.
 
-Currently, two official plugins are available:
+## 🎯 Суть проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Banka** — это персональный помощник для организации косметички и контроля сроков годности. Приложение решает две основные задачи:
 
-## Expanding the ESLint configuration
+1. **Инвентаризация косметики** — наглядное отображение всех имеющихся средств, чтобы не покупать дубликаты и видеть, чего не хватает
+2. **Контроль сроков годности** — отслеживание даты вскрытия косметики, поскольку многие средства после вскрытия имеют ограниченный срок хранения.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Основные возможности:
+- 💄 Ведение каталога всей косметики с фотографиями
+- 📅 Отслеживание даты вскрытия и сроков годности
+- 🏷️ Организация по категориям (уход за лицом, декоративная косметика, уход за телом и т.д.)
+- 🔍 Поиск по косметическим средствам и брендам (функция в разработке)
+- 📱 Адаптивный интерфейс для мобильных устройств
+- 🔐 Авторизация через Google
+- 📊 Персональные данные для каждого пользователя
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠️ Технологический стек
+
+### Frontend:
+- **React 18** — основная библиотека для UI (AntD пока поддерживает только 18 версию)
+- **TypeScript** — типизация
+- **Vite** — сборщик и dev-сервер
+- **Ant Design** — UI-компоненты
+- **React Router** — маршрутизация
+- **TanStack Query** — управление состоянием сервера
+- **Swiper** — слайдер для категорий
+
+### Backend & Инфраструктура:
+- **Firebase** — backend-as-a-service
+  - **Firestore** — база данных
+  - **Authentication** — авторизация через Google
+- **GitHub Pages** — хостинг
+
+### Архитектура:
+Проект использует **Feature-Sliced Design** архитектуру:
+- `app/` — конфигурация приложения
+- `pages/` — страницы приложения
+- `widgets/` — крупные UI-блоки
+- `features/` — бизнес-логика
+- `entities/` — бизнес-сущности
+- `shared/` — переиспользуемый код
+
+## 🚀 Как запустить
+
+### Предварительные требования:
+- Node.js 18+
+- Yarn (рекомендуется) или npm
+
+### Установка и запуск:
+
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone https://github.com/inu255/banka.git
+   cd banka
+   ```
+
+2. **Установите зависимости:**
+   ```bash
+   yarn install
+   # или
+   npm install
+   ```
+
+3. **Запустите в режиме разработки:**
+   ```bash
+   yarn dev
+   # или
+   npm run dev
+   ```
+
+4. **Откройте в браузере:**
+   ```
+   http://localhost:5173
+   ```
+
+### Дополнительные команды:
+
+```bash
+# Сборка для продакшена
+yarn build
+
+# Предварительный просмотр сборки
+yarn preview
+
+# Линтинг кода
+yarn lint
+
+# Деплой на GitHub Pages
+yarn deploy
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌐 Демо
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Приложение доступно по адресу: [https://inu255.github.io/banka/](https://inu255.github.io/banka/)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 📱 Использование
+
+1. Войдите через Google аккаунт
+2. Добавьте категории косметики (если их ещё нет)
+3. Добавляйте косметические средства, указывая:
+   - Название
+   - Бренд
+   - Категорию
+   - Дату вскрытия
+   - Фото (опционально)
+4. Просматривайте косметику по категориям
+5. Используйте поиск для быстрого нахождения нужного средства
+
+---
+
+*Проект создан для личного использования и помощи в организации косметички.*
