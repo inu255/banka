@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import checker from "vite-plugin-checker";
@@ -46,7 +47,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      src: "/src",
+      src: fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
   server: {

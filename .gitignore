@@ -1,0 +1,22 @@
+# Общий корневой .gitignore (минимальный).
+# Узкие/специфичные правила лежат в подпроектах:
+#   - webapp/.gitignore
+#   - backend/.gitignore (появится вместе с Nest-проектом)
+
+# OS / редакторы
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Зависимости и сборка (на случай, если что-то окажется в корне)
+node_modules
+dist
+dist-ssr
+.env
+*.local

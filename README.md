@@ -48,7 +48,7 @@
 
 ### Предварительные требования:
 - Node.js 18+
-- Yarn (рекомендуется) или npm
+- npm
 
 ### Установка и запуск:
 
@@ -60,15 +60,11 @@
 
 2. **Установите зависимости:**
    ```bash
-   yarn install
-   # или
    npm install
    ```
 
 3. **Запустите в режиме разработки:**
    ```bash
-   yarn dev
-   # или
    npm run dev
    ```
 
@@ -81,16 +77,16 @@
 
 ```bash
 # Сборка для продакшена
-yarn build
+npm run build
 
 # Предварительный просмотр сборки
-yarn preview
+npm run preview
 
 # Линтинг кода
-yarn lint
+npm run lint
 
 # Деплой на GitHub Pages
-yarn deploy
+npm run deploy
 ```
 
 ## 🌐 Демо
