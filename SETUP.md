@@ -32,10 +32,10 @@
 
 ## Шаг 3. Общая инфраструктура Nest
 
-- [ ] `PrismaModule` / `PrismaService` (см. `AGENTS.md`, раздел "Общая инфраструктура") —
+- [x] `PrismaModule` / `PrismaService` (см. `AGENTS.md`, раздел "Общая инфраструктура") —
       `@Global()`, с `onModuleInit`/`onModuleDestroy`.
-- [ ] Базовая настройка `main.ts`: `ValidationPipe` глобально, CORS для локального фронта.
-- [ ] Подключить `@nestjs/swagger`, поднять Swagger UI на `/api/docs`.
+- [x] Базовая настройка `main.ts`: `ValidationPipe` глобально, CORS для локального фронта.
+- [x] Подключить `@nestjs/swagger`, поднять Swagger UI на `/api/docs`.
 
 ## Шаг 4. Первый модуль — эталон архитектуры (Categories)
 
