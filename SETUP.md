@@ -16,9 +16,9 @@
 
 ## Шаг 1. База данных локально
 
-- [ ] Добавить в `/backend` `docker-compose.yml` с сервисом `postgres` (образ, порт 5432, volume
+- [x] Добавить в `/backend` `docker-compose.yml` с сервисом `postgres` (образ, порт 5432, volume
       для персистентности).
-- [ ] `docker compose up -d`, убедиться, что БД поднялась и доступна.
+- [x] `docker compose up -d`, убедиться, что БД поднялась и доступна.
 
 ## Шаг 2. Prisma
 

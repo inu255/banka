@@ -1,0 +1,33 @@
+
+# Локальная БД для разработки (единственное, что сейчас нужно от Docker).
+#
+# Поднять:     docker compose up -d
+# Остановить:  docker compose down
+# Данные живут в named volume `postgres_data` — переживают `docker compose down`
+# и перезапуски (сбрасываются только через `docker compose down -v`).
+#
+# Креды ниже — только для локальной разработки. Их же подставим в DATABASE_URL
+# для Prisma на следующем шаге (SETUP.md, Шаг 2):
+#   postgresql://postgres:postgres@localhost:5432/banka
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: banka-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: banka
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d banka"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
