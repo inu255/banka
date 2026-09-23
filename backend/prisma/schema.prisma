@@ -11,3 +11,61 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// Пользователь. Внутренний id (cuid) + внешний id провайдера (сейчас Firebase).
+// При переходе на Yandex/JWT добавится yandexId, вниз по стеку ничего не поменяется.
+model User {
+  id          String     @id @default(cuid())
+  firebaseUid String?    @unique
+  products    Product[]
+  categories  Category[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("users")
+}
+
+// Бренд — ГЛОБАЛЬНАЯ сущность (общая для всех пользователей).
+// В Firestore — корневая коллекция `brands`.
+model Brand {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+
+  @@map("brands")
+}
+
+// Категория — принадлежит конкретному пользователю.
+// В Firestore — подколлекция users/{uid}/categories.
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products  Product[]
+  createdAt DateTime  @default(now())
+
+  @@unique([userId, name])
+  @@map("categories")
+}
+
+// Продукт — принадлежит пользователю, ссылается на бренд и категорию.
+// В Firestore бренд и категория были денормализованы ({id,name}) — теперь честные FK.
+model Product {
+  id         String   @id @default(cuid())
+  name       String
+  openDate   DateTime
+  image      String?  // base64; в перспективе — object storage, не БД
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  brandId    String
+  brand      Brand    @relation(fields: [brandId], references: [id], onDelete: Restrict)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId, categoryId]) // под запрос «продукты по категории»
+  @@map("products")
+}

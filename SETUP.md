@@ -22,13 +22,13 @@
 
 ## Шаг 2. Prisma
 
-- [ ] Установить Prisma (`prisma` + `@prisma/client`), `npx prisma init`.
-- [ ] В `schema.prisma` настроить `datasource` на `postgresql`, `DATABASE_URL` в `.env` указывает на
+- [x] Установить Prisma (`prisma` + `@prisma/client`), `npx prisma init`.
+- [x] В `schema.prisma` настроить `datasource` на `postgresql`, `DATABASE_URL` в `.env` указывает на
       локальный docker-контейнер.
-- [ ] Описать первые модели на основе существующих сущностей из Firebase (`src/shared/types.ts` в
+- [x] Описать первые модели на основе существующих сущностей из Firebase (`src/shared/types.ts` в
       `/webapp`): `User`, `Product`, `Brand`, `Category` — но уже как **нормальные relations**
       (foreign keys), а не денормализованные вложенные объекты, как было в Firestore.
-- [ ] Прогнать первую миграцию (`prisma migrate dev --name init`).
+- [x] Прогнать первую миграцию (`prisma migrate dev --name init`).
 
 ## Шаг 3. Общая инфраструктура Nest
 
