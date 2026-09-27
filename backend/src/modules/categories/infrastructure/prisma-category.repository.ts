@@ -22,14 +22,20 @@ export class PrismaCategoryRepository implements CategoryRepository {
     return rows.map(toDomain);
   }
 
-  async findByIdAndUserId(userId: string, id: string): Promise<Category | null> {
+  async findByIdAndUserId(
+    userId: string,
+    id: string,
+  ): Promise<Category | null> {
     const row = await this.prisma.category.findFirst({
       where: { id, userId },
     });
     return row ? toDomain(row) : null;
   }
 
-  async findByNameAndUserId(userId: string, name: string): Promise<Category | null> {
+  async findByNameAndUserId(
+    userId: string,
+    name: string,
+  ): Promise<Category | null> {
     const row = await this.prisma.category.findUnique({
       where: { userId_name: { userId, name } },
     });
