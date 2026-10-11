@@ -9,7 +9,6 @@ import {
   NotFoundException,
   Param,
   Post,
-  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -31,6 +30,22 @@ import { CreateProductDto } from './dto/create-product.dto.js';
 export class ProductsController {
   constructor(private readonly service: ProductsService) {}
 
+  @Get()
+  findAll(@CurrentUser() user: RequestUser): Promise<Product[]> {
+    return this.service.findAll(user.userId);
+  }
+
+  // Статический путь вместо query-параметра: один эндпоинт не может отдавать
+  // разные схемы в зависимости от query, иначе Swagger/тип-кодген не выберет тип
+  // ответа. 'by-category/:categoryId' объявлен раньше ':id' намеренно.
+  @Get('by-category/:categoryId')
+  findByCategory(
+    @CurrentUser() user: RequestUser,
+    @Param('categoryId') categoryId: string,
+  ): Promise<ProductShort[]> {
+    return this.service.findByCategory(user.userId, categoryId);
+  }
+
   @Get(':id')
   async findById(
     @CurrentUser() user: RequestUser,
@@ -44,16 +59,6 @@ export class ProductsController {
       }
       throw error;
     }
-  }
-
-  @Get()
-  findAll(
-    @CurrentUser() user: RequestUser,
-    @Query('categoryId') categoryId?: string,
-  ): Promise<Product[] | ProductShort[]> {
-    return categoryId
-      ? this.service.findByCategory(user.userId, categoryId)
-      : this.service.findAll(user.userId);
   }
 
   @Post()

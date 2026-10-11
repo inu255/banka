@@ -3,6 +3,10 @@
 /node_modules
 /build
 
+# OpenAPI-схема: транзитный артефакт, генерируется из кода бэкенда
+# (`npm run openapi:generate`) и нужна только как вход для фронтового кодгена.
+/openapi.json
+
 # TypeScript build cache
 *.tsbuildinfo
 

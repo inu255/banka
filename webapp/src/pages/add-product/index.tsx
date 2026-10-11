@@ -8,9 +8,8 @@ import { InteractCategory } from "src/features/interact-category";
 import { getCompressedBase64, InteractImage } from "src/features/interact-image";
 import { InteractName } from "src/features/interact-name";
 import { InteractOpenDate } from "src/features/interact-open-date";
-import { addProduct } from "src/features/product";
+import { addProduct, type AddProductPayload } from "src/features/product";
 import { useAuth } from "src/shared/lib/auth";
-import { type Product as ProductType } from "src/shared/types";
 
 export default function AddProductPage() {
   const { message } = App.useApp();
@@ -20,7 +19,7 @@ export default function AddProductPage() {
   const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (formValue: Omit<ProductType, "id">) => addProduct(String(user?.uid), formValue),
+    mutationFn: (formValue: AddProductPayload) => addProduct(String(user?.uid), formValue),
     onSuccess: () => {
       // queryClient.invalidateQueries({ queryKey: ["brands"] });
       message.open({
@@ -40,7 +39,7 @@ export default function AddProductPage() {
   });
 
   const onFinish: FormProps<ProductForm>["onFinish"] = async (values) => {
-    const payload: Omit<ProductType, "id"> = {
+    const payload: AddProductPayload = {
       brand: {
         id: values.brand.value,
         name: values.brand.label,

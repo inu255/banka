@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { deleteCategory } from "./api";
 import styles from "./styles.module.css";
-import type { Category } from "src/shared/types";
+import type { Category } from "src/shared/api";
 
 type Props = { id: string };
 

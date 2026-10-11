@@ -48,6 +48,8 @@ function toDomain(row: BrandRow): Brand {
   return {
     id: row.id,
     name: row.name,
-    createdAt: row.createdAt,
+    // Домен хранит createdAt строкой (ISO) — сериализуемость важнее, чем Date,
+    // который всё равно превратился бы в ISO-строку при JSON-ответе.
+    createdAt: row.createdAt.toISOString(),
   };
 }

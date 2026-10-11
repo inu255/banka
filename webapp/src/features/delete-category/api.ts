@@ -1,12 +1,11 @@
-import { deleteDoc, doc } from "firebase/firestore";
-import { auth, db } from "src/shared/config/firebase";
+import { api, apiErrorMessage } from "src/shared/api";
 
 export const deleteCategory = async (categoryId: string): Promise<void> => {
-  const user = auth.currentUser;
-  if (!user) {
-    throw new Error("Пользователь не авторизован");
-  }
+  const { error } = await api.DELETE("/categories/{id}", {
+    params: { path: { id: categoryId } },
+  });
 
-  const ref = doc(db, "users", user.uid, "categories", categoryId);
-  await deleteDoc(ref);
+  if (error) {
+    throw new Error(apiErrorMessage(error, "Не удалось удалить категорию"));
+  }
 };

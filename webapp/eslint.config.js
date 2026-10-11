@@ -19,6 +19,13 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      // Аргументы с префиксом `_` считаем намеренно неиспользуемыми. Например, uid/user
+      // больше не нужны: пользователь определяется на бэкенде по Firebase-токену, но
+      // параметры сохранены, чтобы не менять публичные сигнатуры функций.
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },

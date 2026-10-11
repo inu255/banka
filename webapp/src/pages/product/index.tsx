@@ -35,7 +35,7 @@ export default function ProductPage() {
             <Image
               alt="product"
               className={styles.image}
-              src={product?.image}
+              src={product?.image ?? undefined}
               preview={{ maskClassName: "full-width-container" }}
             />
           }

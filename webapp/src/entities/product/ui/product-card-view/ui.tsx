@@ -1,16 +1,16 @@
 import { Card, Image, Typography } from "antd";
 import { useNavigate } from "react-router";
-import type { Product } from "src/shared/types";
+import type { ProductShort } from "src/shared/api";
 import styles from "./styles.module.css";
 
 const { Title, Text } = Typography;
 
-export function ProductCardView({ brand, name, image, id }: Product) {
+export function ProductCardView({ brand, name, image, id }: ProductShort) {
   const navigate = useNavigate();
 
   return (
     <Card
-      cover={<Image className={styles.image} alt="product" src={image} preview={false} />}
+      cover={<Image className={styles.image} alt="product" src={image ?? undefined} preview={false} />}
       onClick={() => navigate(`/product/${id}`)}
       size="small"
     >

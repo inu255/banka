@@ -79,7 +79,8 @@ function toDomain(row: ProductRow): Product {
     name: row.name,
     image: row.image,
     openDate: row.openDate.toISOString().slice(0, 10),
-    createdAt: row.createdAt,
+    // Домен хранит createdAt строкой (ISO) — сериализуемость важнее, чем Date.
+    createdAt: row.createdAt.toISOString(),
     brandId: row.brandId,
     categoryId: row.categoryId,
     userId: row.userId,

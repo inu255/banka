@@ -4,7 +4,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 // Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore } from "firebase/firestore";
 
 // КЛЮЧ FIREBASE НЕ ЯВЛЯЕТСЯ СЕКРЕТОМ
 // https://firebase.google.com/support/guides/security-checklist#:~:text=Because%20Cloud%20Functions%20reuses%20environments,just%20embed%20them%20in%20code.
@@ -24,6 +23,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 // const analytics = getAnalytics(app);
-const db = getFirestore(app);
 
-export { auth, googleProvider, db };
+// Firestore больше не используется: данные ходят через наш бэкенд (src/shared/api).
+export { auth, googleProvider };

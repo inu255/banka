@@ -1,6 +1,4 @@
-import { collection, query, where, getDocs, addDoc, orderBy } from "firebase/firestore";
-import { db } from "src/shared/config/firebase";
-import type { Brand } from "src/shared/types";
+import { api, apiErrorMessage, type Brand } from "src/shared/api";
 
 export const addBrand = async (name: string): Promise<void> => {
   const trimmedName = name.trim();
@@ -9,26 +7,20 @@ export const addBrand = async (name: string): Promise<void> => {
     throw new Error("Название бренда не может быть пустым");
   }
 
-  // Проверка на дубликаты по имени
-  const q = query(collection(db, "brands"), where("name", "==", trimmedName));
-  const snapshot = await getDocs(q);
+  // Проверку на дубликаты и добавление делает бэкенд (POST /brands).
+  const { error } = await api.POST("/brands", { body: { name: trimmedName } });
 
-  if (!snapshot.empty) {
-    throw new Error(`Бренд "${trimmedName}" уже существует`);
+  if (error) {
+    throw new Error(apiErrorMessage(error, "Не удалось добавить бренд"));
   }
-
-  // Добавление нового бренда
-  await addDoc(collection(db, "brands"), {
-    name: trimmedName,
-  });
 };
 
 export const getBrands = async (): Promise<Brand[]> => {
-  const q = query(collection(db, "brands"), orderBy("name"));
-  const snapshot = await getDocs(q);
+  const { data, error } = await api.GET("/brands");
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    name: doc.data().name,
-  }));
+  if (error) {
+    throw new Error(apiErrorMessage(error, "Не удалось загрузить бренды"));
+  }
+
+  return data;
 };

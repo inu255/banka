@@ -60,6 +60,7 @@ function toDomain(row: CategoryRow): Category {
     id: row.id,
     name: row.name,
     userId: row.userId,
-    createdAt: row.createdAt,
+    // Домен хранит createdAt строкой (ISO) — см. prisma-brand.repository.ts.
+    createdAt: row.createdAt.toISOString(),
   };
 }
