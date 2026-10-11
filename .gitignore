@@ -1,25 +1,22 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Общий корневой .gitignore (минимальный).
+# Узкие/специфичные правила лежат в подпроектах:
+#   - webapp/.gitignore
+#   - backend/.gitignore (появится вместе с Nest-проектом)
 
-node_modules
-dist
-dist-ssr
-*.local
-.env
-
-# Editor directories and files
+# OS / редакторы
+.DS_Store
+.idea
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Зависимости и сборка (на случай, если что-то окажется в корне)
+node_modules
+dist
+dist-ssr
+.env
+*.local
