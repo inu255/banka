@@ -50,7 +50,7 @@ export default function AddProductPage() {
         name: values.category.label,
       },
       name: values.name,
-      openDate: values.openDate.valueOf(),
+      openDate: values.openDate.toISOString(),
       // TODO: нужно хранить сразу в base64, но в инпуте картинки не работает. Надо разобраться и пофиксить
       image: values.image ? await getCompressedBase64(values.image.file) : "",
     });

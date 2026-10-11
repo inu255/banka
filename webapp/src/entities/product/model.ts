@@ -1,3 +1,5 @@
+import type { Dayjs } from "dayjs";
+
 export type ProductType = {
   id: string;
   name: string;
@@ -9,6 +11,6 @@ export type ProductType = {
     label: string;
     value: string;
   };
-  openDate: string;
+  openDate: Dayjs;
   image?: { file: File };
 };
