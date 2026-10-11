@@ -15,4 +15,5 @@ export interface ProductRepository {
     categoryId: string,
   ): Promise<ProductShort[]>;
   create(userId: string, input: CreateProductInput): Promise<Product>;
+  delete(userId: string, id: string): Promise<void>;
 }

@@ -46,4 +46,13 @@ export class ProductsService {
 
     return this.repository.create(userId, { ...input, name });
   }
+
+  async delete(userId: string, id: string): Promise<void> {
+    const existing = await this.repository.findByIdAndUserId(userId, id);
+    if (!existing) {
+      throw new ProductNotFoundError();
+    }
+
+    await this.repository.delete(userId, id);
+  }
 }

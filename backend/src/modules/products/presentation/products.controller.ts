@@ -2,7 +2,10 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   NotFoundException,
   Param,
   Post,
@@ -67,4 +70,20 @@ export class ProductsController {
       throw error;
     }
   }
+
+  @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async remove(
+      @CurrentUser() user: RequestUser,
+      @Param('id') id: string,
+    ): Promise<void> {
+      try {
+        await this.service.delete(user.userId, id);
+      } catch (error) {
+        if (error instanceof ProductNotFoundError) {
+          throw new NotFoundException(error.message);
+        }
+        throw error;
+      }
+    }
 }
