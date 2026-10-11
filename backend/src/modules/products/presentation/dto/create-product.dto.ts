@@ -14,11 +14,11 @@ export class CreateProductDto {
   @MaxLength(100)
   name: string;
 
-  @IsUUID()
+  @IsUUID('4')
   @IsNotEmpty()
   brandId: string;
 
-  @IsUUID()
+  @IsUUID('4')
   @IsNotEmpty()
   categoryId: string;
 
