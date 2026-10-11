@@ -40,7 +40,7 @@ export default function AddProductPage() {
   });
 
   const onFinish: FormProps<ProductForm>["onFinish"] = async (values) => {
-    mutate({
+    const payload: Omit<ProductType, "id"> = {
       brand: {
         id: values.brand.value,
         name: values.brand.label,
@@ -50,10 +50,14 @@ export default function AddProductPage() {
         name: values.category.label,
       },
       name: values.name,
-      openDate: values.openDate.toISOString(),
-      // TODO: нужно хранить сразу в base64, но в инпуте картинки не работает. Надо разобраться и пофиксить
-      image: values.image ? await getCompressedBase64(values.image.file) : "",
-    });
+      openDate: values.openDate.format("YYYY-MM-DD"),
+    };
+
+    if (values.image) {
+      payload.image = await getCompressedBase64(values.image.file);
+    }
+
+    mutate(payload);
   };
 
   return (

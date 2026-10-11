@@ -7,7 +7,7 @@ import type { Category } from '../../categories/domain/category.entity.js';
 export interface Product {
   id: string;
   name: string;
-  openDate: Date;
+  openDate: string; // 'YYYY-MM-DD'
   image: string | null;
   userId: string;
   brandId: string;
@@ -32,6 +32,6 @@ export interface CreateProductInput {
   name: string;
   brandId: string;
   categoryId: string;
-  openDate: Date;
+  openDate: string; // 'YYYY-MM-DD'
   image?: string;
 }

@@ -56,7 +56,7 @@ export class PrismaProductRepository implements ProductRepository {
     const row = await this.prisma.product.create({
       data: {
         name: input.name,
-        openDate: input.openDate,
+        openDate: new Date(input.openDate),
         image: input.image,
         userId,
         brandId: input.brandId,
@@ -78,7 +78,7 @@ function toDomain(row: ProductRow): Product {
     id: row.id,
     name: row.name,
     image: row.image,
-    openDate: row.openDate,
+    openDate: row.openDate.toISOString().slice(0, 10),
     createdAt: row.createdAt,
     brandId: row.brandId,
     categoryId: row.categoryId,

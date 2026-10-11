@@ -1,6 +1,5 @@
-import { Type } from 'class-transformer';
 import {
-  IsDate,
+  IsDateString,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -23,9 +22,9 @@ export class CreateProductDto {
   @IsNotEmpty()
   categoryId: string;
 
-  @Type(() => Date)
-  @IsDate()
-  openDate: Date;
+  @IsDateString()
+  @Matches(/^\d{4}-\d{2}-\d{2}$/)
+  openDate: string;
 
   @IsOptional()
   @IsString()

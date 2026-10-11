@@ -55,7 +55,7 @@ model Category {
 model Product {
   id         String   @id @default(cuid())
   name       String
-  openDate   DateTime
+  openDate   DateTime @db.Date
   image      String?  // base64; в перспективе — object storage, не БД
   userId     String
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
