@@ -61,6 +61,7 @@ export class PrismaProductRepository implements ProductRepository {
         userId,
         brandId: input.brandId,
         categoryId: input.categoryId,
+        comment: input.comment
       },
       include: productInclude,
     });
@@ -86,5 +87,6 @@ function toDomain(row: ProductRow): Product {
     userId: row.userId,
     brand: { id: row.brand.id, name: row.brand.name },
     category: { id: row.category.id, name: row.category.name },
+    comment: row.comment
   };
 }

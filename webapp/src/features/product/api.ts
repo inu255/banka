@@ -6,6 +6,7 @@ import { api, apiErrorMessage, type Product, type ProductShort } from "src/share
 export type AddProductPayload = {
   name: string;
   openDate: string;
+  comment?: string;
   image?: string;
   brand: { id: string; name: string };
   category: { id: string; name: string };
@@ -41,6 +42,7 @@ export const addProduct = async (_uid: string, product: AddProductPayload): Prom
       categoryId: product.category.id,
       openDate: product.openDate,
       image: product.image,
+      comment: product.comment,
     },
   });
 

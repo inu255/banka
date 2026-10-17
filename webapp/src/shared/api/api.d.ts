@@ -171,6 +171,7 @@ export interface components {
             categoryId: string;
             brand: components["schemas"]["BrandSummary"];
             category: components["schemas"]["CategorySummary"];
+            comment: string | null;
             createdAt: string;
         };
         ProductShort: {
@@ -187,6 +188,7 @@ export interface components {
             categoryId: string;
             openDate: string;
             image?: string;
+            comment?: string | null;
         };
     };
     responses: never;

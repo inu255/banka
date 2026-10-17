@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { ProductPageView, type ProductType as ProductForm } from "src/entities/product";
 import { InteractBrand } from "src/features/interact-brand";
 import { InteractCategory } from "src/features/interact-category";
+import { InteractComment } from "src/features/interact-comment";
 import { getCompressedBase64, InteractImage } from "src/features/interact-image";
 import { InteractName } from "src/features/interact-name";
 import { InteractOpenDate } from "src/features/interact-open-date";
@@ -56,6 +57,10 @@ export default function AddProductPage() {
       payload.image = await getCompressedBase64(values.image.file);
     }
 
+    if (values.comment?.trim()) {
+      payload.comment = values.comment.trim();
+    }
+
     mutate(payload);
   };
 
@@ -67,6 +72,7 @@ export default function AddProductPage() {
         brand={<InteractBrand />}
         category={<InteractCategory />}
         openDate={<InteractOpenDate />}
+        comment={<InteractComment />}
       />
 
       <Form.Item label={null}>

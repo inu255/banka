@@ -71,6 +71,18 @@ export default function ProductPage() {
               <Text className={styles.text}>{dayjs(product?.openDate).format("DD.MM.YYYY")}</Text>
             </div>
           }
+          comment={
+            product?.comment ? (
+              <div>
+                <Title style={{ marginBottom: 0 }} level={4}>
+                  Комментарий
+                </Title>
+                <Text className={styles.text} style={{ whiteSpace: "pre-wrap" }}>
+                  {product.comment}
+                </Text>
+              </div>
+            ) : undefined
+          }
         />
 
         <Flex justify="space-between" gap="small">
