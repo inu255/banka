@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsDateString,
   IsNotEmpty,
@@ -31,4 +32,12 @@ export class CreateProductDto {
   @MaxLength(2_000_000)
   @Matches(/^data:image\//)
   image?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(500)
+  @Transform(({ value }) =>
+    typeof value === 'string' && value.trim() === '' ? null : value,
+  )
+  comment?: string | null;
 }

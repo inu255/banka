@@ -4,22 +4,6 @@
  */
 
 export interface paths {
-    "/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["AppController_getHello"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/categories": {
         parameters: {
             query?: never;
@@ -171,6 +155,7 @@ export interface components {
             categoryId: string;
             brand: components["schemas"]["BrandSummary"];
             category: components["schemas"]["CategorySummary"];
+            comment: string | null;
             createdAt: string;
         };
         ProductShort: {
@@ -187,6 +172,7 @@ export interface components {
             categoryId: string;
             openDate: string;
             image?: string;
+            comment?: string | null;
         };
     };
     responses: never;
@@ -197,25 +183,6 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    AppController_getHello: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": string;
-                };
-            };
-        };
-    };
     CategoriesController_findAll: {
         parameters: {
             query?: never;

@@ -12,5 +12,6 @@ export type ProductType = {
     value: string;
   };
   openDate: Dayjs;
+  comment?: string;
   image?: { file: File };
 };

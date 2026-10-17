@@ -10,36 +10,26 @@
 // Pick<Brand, 'id' | 'name'>, потому что mapped-тип Swagger тоже не разворачивает.
 export class BrandSummary {
   id: string;
-
   name: string;
 }
 
 // Аналогично BrandSummary, но для категории.
 export class CategorySummary {
   id: string;
-
   name: string;
 }
 
 export class Product {
   id: string;
-
   name: string;
-
   openDate: string; // 'YYYY-MM-DD'
-
   image: string | null;
-
   userId: string;
-
   brandId: string;
-
   categoryId: string;
-
   brand: BrandSummary;
-
   category: CategorySummary;
-
+  comment: string | null;
   createdAt: string; // ISO-8601
 }
 
@@ -47,11 +37,8 @@ export class Product {
 // только поля, которые рисует карточка.
 export class ProductShort {
   id: string;
-
   name: string;
-
   image: string | null;
-
   brand: BrandSummary;
 }
 
@@ -63,4 +50,5 @@ export interface CreateProductInput {
   categoryId: string;
   openDate: string; // 'YYYY-MM-DD'
   image?: string;
+  comment?: string | null;
 }

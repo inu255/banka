@@ -20,3 +20,4 @@ dist
 dist-ssr
 .env
 *.local
+.cline
