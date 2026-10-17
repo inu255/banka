@@ -109,3 +109,35 @@ npm run deploy
 ---
 
 *Проект создан для личного использования и помощи в организации косметички.*
+
+## 📝 Заметки для разработки
+
+### Локальные адреса
+| Что | URL |
+| --- | --- |
+| Бэкенд (API) | http://localhost:3000 |
+| Swagger UI | http://localhost:3000/api/docs |
+| OpenAPI JSON-схема | http://localhost:3000/api/docs-json |
+| Фронтенд | http://localhost:5173 |
+
+### Запуск
+- `npm run dev` — фронт + бэк (Postgres должен быть уже запущен)
+- `npm run dev:db` — Postgres в Docker + фронт + бэк
+- `npm run db:down` — остановить Postgres
+
+### После изменения схемы БД или API — перегенерировать типы
+Схему БД меняем только через Prisma-миграции. После миграции обновляем типы
+(каждая команда выполняется из корня репозитория):
+
+```bash
+# 1. Миграция БД + обновление Prisma Client
+(cd backend && npx prisma migrate dev --name описание_изменений)
+
+# 2. Сборка + генерация openapi.json
+#    (nest build заодно прогоняет Swagger CLI-плагин из nest-cli.json,
+#     который сам добавляет @ApiProperty в DTO — отдельной команды для этого нет)
+(cd backend && npm run openapi:generate)
+
+# 3. Фронтенд: генерация типов из свежего openapi.json
+(cd webapp && npm run api:generate)
+```

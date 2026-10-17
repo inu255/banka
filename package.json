@@ -1,0 +1,12 @@
+{
+  "name": "banka",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k -n backend,webapp -c blue,green \"npm --prefix backend run start:dev\" \"npm --prefix webapp run dev\"",
+    "dev:db": "docker compose -f backend/docker-compose.yml up -d --wait && npm run dev",
+    "db:down": "docker compose -f backend/docker-compose.yml down"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}
